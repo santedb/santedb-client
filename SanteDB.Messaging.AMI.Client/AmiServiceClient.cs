@@ -368,7 +368,7 @@ namespace SanteDB.Messaging.AMI.Client
 		/// Gets a list applications for a specific query.
 		/// </summary>
 		/// <returns>Returns a list of application which match the specific query.</returns>
-		public AmiCollection<SecurityEntityInfo<SecurityApplication>> GetApplications(Expression<Func<SecurityEntityInfo<SecurityApplication>, bool>> query)
+		public AmiCollection<SecurityEntityInfo<SecurityApplication>> GetApplications(Expression<Func<SecurityApplication, bool>> query)
 		{
 			return this.Client.Get<AmiCollection<SecurityEntityInfo<SecurityApplication>>>("application", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
@@ -447,7 +447,7 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="query">The query expression to use to find the devices.</param>
 		/// <returns>Returns a collection of devices which match the specified query.</returns>
-		public AmiCollection<SecurityEntityInfo<SecurityDevice>> GetDevices(Expression<Func<SecurityEntityInfo<SecurityDevice>, bool>> query)
+		public AmiCollection<SecurityEntityInfo<SecurityDevice>> GetDevices(Expression<Func<SecurityDevice, bool>> query)
 		{
 			return this.Client.Get<AmiCollection<SecurityEntityInfo<SecurityDevice>>>("device", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
