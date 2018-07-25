@@ -36,6 +36,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using SanteDB.Core.Alerting;
+using SanteDB.Core.Model.AMI.Collections;
 
 namespace SanteDB.Messaging.AMI.Client
 {
@@ -103,9 +104,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="applicationInfo">The security application to be created.</param>
 		/// <returns>Returns the created security application.</returns>
-		public SecurityApplicationInfo CreateApplication(SecurityApplicationInfo applicationInfo)
+		public SecurityEntityInfo<SecurityApplication> CreateApplication(SecurityEntityInfo<SecurityApplication> applicationInfo)
 		{
-			return this.Client.Post<SecurityApplicationInfo, SecurityApplicationInfo>("application", this.Client.Accept, applicationInfo);
+			return this.Client.Post<SecurityEntityInfo<SecurityApplication>, SecurityEntityInfo<SecurityApplication>>("application", this.Client.Accept, applicationInfo);
 		}
 
 		/// <summary>
@@ -134,9 +135,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="device">The device to be created.</param>
 		/// <returns>Returns the newly created device.</returns>
-		public SecurityDeviceInfo CreateDevice(SecurityDeviceInfo device)
+		public SecurityEntityInfo<SecurityDevice> CreateDevice(SecurityEntityInfo<SecurityDevice> device)
 		{
-			return this.Client.Post<SecurityDeviceInfo, SecurityDeviceInfo>("device", this.Client.Accept, device);
+			return this.Client.Post<SecurityEntityInfo<SecurityDevice>, SecurityEntityInfo<SecurityDevice>>("device", this.Client.Accept, device);
 		}
 
 		/// <summary>
@@ -194,9 +195,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="applicationId">The id of the application to be deleted.</param>
 		/// <returns>Returns the deleted application.</returns>
-		public SecurityApplicationInfo DeleteApplication(string applicationId)
+		public SecurityEntityInfo<SecurityApplication> DeleteApplication(string applicationId)
 		{
-			return this.Client.Delete<SecurityApplicationInfo>($"application/{applicationId}");
+			return this.Client.Delete<SecurityEntityInfo<SecurityApplication>>($"application/{applicationId}");
 		}
 
 		/// <summary>
@@ -235,9 +236,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the device to be deleted.</param>
 		/// <returns>Returns the deleted device.</returns>
-		public SecurityDeviceInfo DeleteDevice(string id)
+		public SecurityEntityInfo<SecurityDevice> DeleteDevice(string id)
 		{
-			return this.Client.Delete<SecurityDeviceInfo>($"device/{id}");
+			return this.Client.Delete<SecurityEntityInfo<SecurityDevice>>($"device/{id}");
 		}
 
 		/// <summary>
@@ -358,18 +359,18 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the application to retrieve.</param>
 		/// <returns>Returns the application.</returns>
-		public SecurityApplicationInfo GetApplication(string id)
+		public SecurityEntityInfo<SecurityApplication> GetApplication(string id)
 		{
-			return this.Client.Get<SecurityApplicationInfo>($"application/{id}");
+			return this.Client.Get<SecurityEntityInfo<SecurityApplication>>($"application/{id}");
 		}
 
 		/// <summary>
 		/// Gets a list applications for a specific query.
 		/// </summary>
 		/// <returns>Returns a list of application which match the specific query.</returns>
-		public AmiCollection<SecurityApplicationInfo> GetApplications(Expression<Func<SecurityApplicationInfo, bool>> query)
+		public AmiCollection<SecurityEntityInfo<SecurityApplication>> GetApplications(Expression<Func<SecurityEntityInfo<SecurityApplication>, bool>> query)
 		{
-			return this.Client.Get<AmiCollection<SecurityApplicationInfo>>("application", QueryExpressionBuilder.BuildQuery(query).ToArray());
+			return this.Client.Get<AmiCollection<SecurityEntityInfo<SecurityApplication>>>("application", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
 
 		/// <summary>
@@ -436,9 +437,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Returns the security device.</returns>
-		public SecurityDeviceInfo GetDevice(string id)
+		public SecurityEntityInfo<SecurityDevice> GetDevice(string id)
 		{
-			return this.Client.Get<SecurityDeviceInfo>($"device/{id}");
+			return this.Client.Get<SecurityEntityInfo<SecurityDevice>>($"device/{id}");
 		}
 
 		/// <summary>
@@ -446,9 +447,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="query">The query expression to use to find the devices.</param>
 		/// <returns>Returns a collection of devices which match the specified query.</returns>
-		public AmiCollection<SecurityDeviceInfo> GetDevices(Expression<Func<SecurityDeviceInfo, bool>> query)
+		public AmiCollection<SecurityEntityInfo<SecurityDevice>> GetDevices(Expression<Func<SecurityEntityInfo<SecurityDevice>, bool>> query)
 		{
-			return this.Client.Get<AmiCollection<SecurityDeviceInfo>>("device", QueryExpressionBuilder.BuildQuery(query).ToArray());
+			return this.Client.Get<AmiCollection<SecurityEntityInfo<SecurityDevice>>>("device", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
 
 		/// <summary>
@@ -700,9 +701,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// <param name="applicationId">The id of the application to be updated.</param>
 		/// <param name="applicationInfo">The application containing the updated information.</param>
 		/// <returns>Returns the updated application.</returns>
-		public SecurityApplicationInfo UpdateApplication(string applicationId, SecurityApplicationInfo applicationInfo)
+		public SecurityEntityInfo<SecurityApplication> UpdateApplication(string applicationId, SecurityEntityInfo<SecurityApplication> applicationInfo)
 		{
-			return this.Client.Put<SecurityApplicationInfo, SecurityApplicationInfo>($"application/{applicationId}", this.Client.Accept, applicationInfo);
+			return this.Client.Put<SecurityEntityInfo<SecurityApplication>, SecurityEntityInfo<SecurityApplication>>($"application/{applicationId}", this.Client.Accept, applicationInfo);
 		}
 
 		/// <summary>
@@ -733,9 +734,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// <param name="deviceId">The id of the device to be updated.</param>
 		/// <param name="deviceInfo">The device containing the updated information.</param>
 		/// <returns>Returns the updated device.</returns>
-		public SecurityDeviceInfo UpdateDevice(string deviceId, SecurityDeviceInfo deviceInfo)
+		public SecurityEntityInfo<SecurityDevice> UpdateDevice(string deviceId, SecurityEntityInfo<SecurityDevice> deviceInfo)
 		{
-			return this.Client.Put<SecurityDeviceInfo, SecurityDeviceInfo>($"device/{deviceId}", this.Client.Accept, deviceInfo);
+			return this.Client.Put<SecurityEntityInfo<SecurityDevice>, SecurityEntityInfo<SecurityDevice>>($"device/{deviceId}", this.Client.Accept, deviceInfo);
 		}
 
 		/// <summary>
