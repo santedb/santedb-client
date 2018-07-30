@@ -17,7 +17,7 @@
  * User: fyfej
  * Date: 2017-9-1
  */
-using SanteDB.Core.Data.Warehouse;
+using SanteDB.Core.Model.Warehouse;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop.Clients;
 using SanteDB.Core.Model.RISI;

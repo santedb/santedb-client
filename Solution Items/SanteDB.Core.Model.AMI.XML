@@ -4,296 +4,41 @@
         <name>SanteDB.Core.Model.AMI</name>
     </assembly>
     <members>
-        <member name="T:SanteDB.Core.Model.AMI.Security.AmiCollection`1">
+        <member name="T:SanteDB.Core.Model.AMI.Collections.AmiCollection">
             <summary>
             Represents an administrative collection item.
             </summary>
-            <typeparam name="T">The type of collection of the collection items.</typeparam>
         </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.AmiCollection`1.#ctor">
+        <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Security.AmiCollection`1"/> class.
+            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class.
             </summary>
         </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.AmiCollection`1.#ctor(System.Collections.Generic.List{`0})">
+        <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor(System.Collections.Generic.List{System.Object})">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Security.AmiCollection`1"/> class
+            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class
             with a specific list of collection items.
             </summary>
         </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.AmiCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Int32,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Security.AmiCollection`1"/> class
+            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class
             with a specific list of collection items.
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AmiCollection`1.CollectionItem">
+        <member name="P:SanteDB.Core.Model.AMI.Collections.AmiCollection.CollectionItem">
             <summary>
             Gets or sets a list of collection items.
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AmiCollection`1.Offset">
+        <member name="P:SanteDB.Core.Model.AMI.Collections.AmiCollection.Offset">
             <summary>
             Gets or sets the total offset.
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AmiCollection`1.Size">
+        <member name="P:SanteDB.Core.Model.AMI.Collections.AmiCollection.Size">
             <summary>
             Gets or sets the total collection size.
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.AuditInfo">
-            <summary>
-            Audit information which wraps audit data from service core
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.AuditInfo.#ctor">
-            <summary>
-            Creates a new instance of audit information
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.AuditInfo.#ctor(MARC.HI.EHRS.SVC.Auditing.Data.AuditData)">
-            <summary>
-             Audit info with data
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.Audit">
-            <summary>
-            Gets or sets the audit
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.ModifiedOn">
-            <summary>
-            When was the audit modified
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.ProcessId">
-            <summary>
-            Gets the process identifier of the mobile application
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.SecurityDeviceId">
-            <summary>
-            Gets or sets the device identifier which sent the audit
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.RevokeReason">
-            <summary>
-            The reason something is revoked
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionInfo">
-            <summary>
-            Enrollment information
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.AdminContact">
-            <summary>
-            Administration contact
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.AdminSiteAddress">
-            <summary>
-            Administration
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.DispositionMessage">
-            <summary>
-            Disposition message
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.DistinguishedName">
-            <summary>
-            DN
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.EMail">
-            <summary>
-            Email address of user
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.NotAfter">
-            <summary>
-            Expiry
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.NotBefore">
-            <summary>
-            Before date
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RequestID">
-            <summary>
-            RequestId
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.ResolvedWhen">
-            <summary>
-            Resolved on
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RevokedReason">
-            <summary>
-            Revoke reason from Keystore
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RevokedWhen">
-            <summary>
-            Revoked on
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.SubmittedWhen">
-            <summary>
-            Submitted on
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.XmlRevokeReason">
-            <summary>
-            Revokation reason
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.XmlStatusCode">
-            <summary>
-            Status code
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionRequest">
-            <summary>
-            Submission request
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.AdminAddress">
-            <summary>
-            Gets or sets the admin address
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.AdminContactName">
-            <summary>
-            Gets or sets the contact name
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.CmcRequest">
-            <summary>
-            Gets or sets the cmc request
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionResult">
-            <summary>
-            Represents the submission result
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.SubmissionResult.#ctor(System.String,System.Int32,SanteDB.Core.Model.AMI.Security.SubmissionStatus,System.String)">
-            <summary>
-            Creates a new client certificate request result based on the internal request response
-            </summary>
-            <param name="certificateRequestResponse"></param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Certificate">
-            <summary>
-            Gets or sets the certificate content
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Message">
-            <summary>
-            Gets or sets the message from the server
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.RequestId">
-            <summary>
-            Gets or sets the request id
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Status">
-            <summary>
-            Gets or sets the status
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionStatus">
-            <summary>
-            Represents a submission status.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.NotComplete">
-            <summary>
-            The submission status is not yet complete.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Failed">
-            <summary>
-            The submission status failed.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Denied">
-            <summary>
-            The submission status is denied.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Issued">
-            <summary>
-            The submission status is issued.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.IssuedSeparately">
-            <summary>
-            The submission status is issued separately.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Submission">
-            <summary>
-            The submission status is submitted.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Revoked">
-            <summary>
-            The submission status is revoked.
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Security.X509Certificate2Info">
-            <summary>
-            Certificate information
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String)">
-            <summary>
-            Constructs a certificate info
-            </summary>
-            <param name="cert"></param>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
-            <summary>
-            Create from a CA attribute set
-            </summary>
-            <param name="attributes"></param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Id">
-            <summary>
-            The identifier of the certificate
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Issuer">
-            <summary>
-            Gets or sets the issuers
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.NotAfter">
-            <summary>
-            Gets or sets the expiry date
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.NotBefore">
-            <summary>
-            Gets or sets the issue date
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Subject">
-            <summary>
-            Distinguished name
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Thumbprint">
-            <summary>
-            Gets or sets the thumbprint
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Applet.AppletManifestInfo">
@@ -323,88 +68,69 @@
             Publisher information if available
             </summary>
         </member>
+        <member name="T:SanteDB.Core.Model.AMI.Auth.ISecurityEntityInfo`1">
+            <summary>
+            Represents an object that provide a wrapper for a security info
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.ISecurityEntityInfo`1.Entity">
+            <summary>
+            Gets or sets the security object entity
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.ISecurityEntityInfo`1.Policies">
+            <summary>
+            Gets the policies for the object
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo">
             <summary>
-            Represents a wrapper for the <see cref="T:SanteDB.Core.Model.Security.SecurityApplication"/> class.
+            Represents wrapper information for security devices
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo"/> class.
+            Default CTOR
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.#ctor(SanteDB.Core.Model.Security.SecurityApplication)">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo"/> class
-            with a specific <see cref="T:SanteDB.Core.Model.Security.SecurityApplication"/> instance.
-            </summary>
-            <param name="application">The security application.</param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Application">
-            <summary>
-            Gets or sets the application.
+            Creates a new app info from the specified object
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.ApplicationSecret">
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Entity">
             <summary>
-            Gets or sets the application secret of the application.
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Id">
-            <summary>
-            Gets or sets the id of the application.
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Name">
-            <summary>
-            Gets or sets the name of the application.
+            Gets or sets the entity that is wrapped by this wrapper
             </summary>
         </member>
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Policies">
             <summary>
-            Gets or sets the policies associated with the application.
+            Gets or sets the policies that are to be applied are already applied to the entity
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo">
             <summary>
-            Represents a wrapper for a <see cref="T:SanteDB.Core.Model.Security.SecurityDevice"/>.
+            Represents wrapper information for security devices
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo"/> class.
+            Default CTOR
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.#ctor(SanteDB.Core.Model.Security.SecurityDevice)">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo"/> class
-            with a specific <see cref="T:SanteDB.Core.Model.Security.SecurityDevice"/> instance.
-            </summary>
-            <param name="device">The security device instance.</param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Device">
-            <summary>
-            Gets or sets the security device of the security device info.
+            Creates a new device info from the specified object
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.DeviceSecret">
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Entity">
             <summary>
-            Gets or sets the secret of the device.
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Id">
-            <summary>
-            Gets or sets the id of the device.
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Name">
-            <summary>
-            Gets or sets the name of the device.
+            Gets or sets the entity that is wrapped by this wrapper
             </summary>
         </member>
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Policies">
             <summary>
-            Gets or sets the list of security policies associated with the security device.
+            Gets or sets the policies that are to be applied are already applied to the entity
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityPolicyInfo">
@@ -454,38 +180,62 @@
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo">
             <summary>
-            Represents security role information.
+            Represents additional information for security role
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo"/> class.
+            Create new security role info
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.#ctor(SanteDB.Core.Model.Security.SecurityRole)">
             <summary>
-            Creates a new security role information object from the specified security role.
-            </summary>
-            <param name="role">The security role.</param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Id">
-            <summary>
-            Gets or sets the identifier of the message
+            Create new security role information from the specified role
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Name">
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Entity">
             <summary>
-            Gets or sets the name of the group
+            Gets or sets the entity that is wrapped by this wrapper
             </summary>
         </member>
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Policies">
             <summary>
-            Represents policies
+            Gets or sets the policies that are to be applied are already applied to the entity
             </summary>
         </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Role">
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Users">
             <summary>
-            Gets or sets the role information
+            Gets the users in the specified role
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo">
+            <summary>
+            Represents security user information
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.#ctor">
+            <summary>
+            Default ctor
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.#ctor(SanteDB.Core.Model.Security.SecurityUser)">
+            <summary>
+            Get the security user information
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Entity">
+            <summary>
+            Represents the entity
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.PasswordOnly">
+            <summary>
+            When true, indicates that the update is for password setting only
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Roles">
+            <summary>
+            Gets or sets the role this user belongs to
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.TfaRequestInfo">
@@ -511,57 +261,6 @@
         <member name="P:SanteDB.Core.Model.AMI.Auth.TfaRequestInfo.Verification">
             <summary>
             The verification (usually the phone number or e-mail address of the user)
-            </summary>
-        </member>
-        <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo">
-            <summary>
-            Gets or sets security user information
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.#ctor(SanteDB.Core.Model.Security.SecurityUser)">
-            <summary>
-            Creates a new security user from the specified info
-            </summary>
-            <param name="u"></param>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Email">
-            <summary>
-            E-mail address
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Lockout">
-            <summary>
-            Lockout
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Password">
-            <summary>
-            User password
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Roles">
-            <summary>
-            Roles
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.User">
-            <summary>
-            Security user object
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.UserId">
-            <summary>
-            Gets the user identifier
-            </summary>
-        </member>
-        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.UserName">
-            <summary>
-            Gets or sets the name of the user
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.TfaMechanismInfo">
@@ -850,6 +549,16 @@
             Gets or sets the name
             </summary>
         </member>
+        <member name="T:SanteDB.Core.Model.AMI.IAmiIdentified">
+            <summary>
+            Represents an interface to extract the URL identifier path
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.IAmiIdentified.Key">
+            <summary>
+            Get the desired url resource key 
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Logging.LogFileInfo">
             <summary>
             Log file information
@@ -873,6 +582,280 @@
         <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.Size">
             <summary>
             Gets or sets the size of the file
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.Key">
+            <summary>
+            Get the requested key
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.AuditSubmission">
+            <summary>
+            Audit information which wraps audit data from service core
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.AuditSubmission.#ctor">
+            <summary>
+            Creates a new instance of audit information
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.AuditSubmission.#ctor(MARC.HI.EHRS.SVC.Auditing.Data.AuditData)">
+            <summary>
+             Audit info with data
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditSubmission.Audit">
+            <summary>
+            Gets or sets the audit
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditSubmission.ModifiedOn">
+            <summary>
+            When was the audit modified
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditSubmission.ProcessId">
+            <summary>
+            Gets the process identifier of the mobile application
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditSubmission.SecurityDeviceId">
+            <summary>
+            Gets or sets the device identifier which sent the audit
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.AuditInfo">
+            <summary>
+            Represents a simple wrapper for an audit data instance
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.Key">
+            <summary>
+            Get the key for this object
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.RevokeReason">
+            <summary>
+            The reason something is revoked
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionInfo">
+            <summary>
+            Enrollment information
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.AdminContact">
+            <summary>
+            Administration contact
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.AdminSiteAddress">
+            <summary>
+            Administration
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.DispositionMessage">
+            <summary>
+            Disposition message
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.DistinguishedName">
+            <summary>
+            DN
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.EMail">
+            <summary>
+            Email address of user
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.NotAfter">
+            <summary>
+            Expiry
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.NotBefore">
+            <summary>
+            Before date
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RequestID">
+            <summary>
+            RequestId
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.ResolvedWhen">
+            <summary>
+            Resolved on
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RevokedReason">
+            <summary>
+            Revoke reason from Keystore
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.RevokedWhen">
+            <summary>
+            Revoked on
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.SubmittedWhen">
+            <summary>
+            Submitted on
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.XmlRevokeReason">
+            <summary>
+            Revokation reason
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionInfo.XmlStatusCode">
+            <summary>
+            Status code
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.SubmissionInfo.FromAttributes(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Create new submission info from attributes
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionRequest">
+            <summary>
+            Submission request
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.AdminAddress">
+            <summary>
+            Gets or sets the admin address
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.AdminContactName">
+            <summary>
+            Gets or sets the contact name
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionRequest.CmcRequest">
+            <summary>
+            Gets or sets the cmc request
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionResult">
+            <summary>
+            Represents the submission result
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.SubmissionResult.#ctor(System.String,System.Int32,SanteDB.Core.Model.AMI.Security.SubmissionStatus,System.String)">
+            <summary>
+            Creates a new client certificate request result based on the internal request response
+            </summary>
+            <param name="certificateRequestResponse"></param>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Certificate">
+            <summary>
+            Gets or sets the certificate content
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Message">
+            <summary>
+            Gets or sets the message from the server
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.RequestId">
+            <summary>
+            Gets or sets the request id
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Status">
+            <summary>
+            Gets or sets the status
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionStatus">
+            <summary>
+            Represents a submission status.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.NotComplete">
+            <summary>
+            The submission status is not yet complete.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Failed">
+            <summary>
+            The submission status failed.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Denied">
+            <summary>
+            The submission status is denied.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Issued">
+            <summary>
+            The submission status is issued.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.IssuedSeparately">
+            <summary>
+            The submission status is issued separately.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Submission">
+            <summary>
+            The submission status is submitted.
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.SubmissionStatus.Revoked">
+            <summary>
+            The submission status is revoked.
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Security.X509Certificate2Info">
+            <summary>
+            Certificate information
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String)">
+            <summary>
+            Constructs a certificate info
+            </summary>
+            <param name="cert"></param>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Create from a CA attribute set
+            </summary>
+            <param name="attributes"></param>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Id">
+            <summary>
+            The identifier of the certificate
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Issuer">
+            <summary>
+            Gets or sets the issuers
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.NotAfter">
+            <summary>
+            Gets or sets the expiry date
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.NotBefore">
+            <summary>
+            Gets or sets the issue date
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Subject">
+            <summary>
+            Distinguished name
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.Thumbprint">
+            <summary>
+            Gets or sets the thumbprint
             </summary>
         </member>
     </members>
