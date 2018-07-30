@@ -108,6 +108,16 @@
             Gets or sets the policies that are to be applied are already applied to the entity
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Key">
+            <summary>
+            Get the key for the object
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.Tag">
+            <summary>
+            Get the tag
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo">
             <summary>
             Represents wrapper information for security devices
@@ -131,6 +141,16 @@
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Policies">
             <summary>
             Gets or sets the policies that are to be applied are already applied to the entity
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Key">
+            <summary>
+            Get the key for the object
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Tag">
+            <summary>
+            Get the tag
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityPolicyInfo">
@@ -208,6 +228,16 @@
             Gets the users in the specified role
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Key">
+            <summary>
+            Get the key for the object
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.Tag">
+            <summary>
+            Get the tag
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo">
             <summary>
             Represents security user information
@@ -236,6 +266,21 @@
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Roles">
             <summary>
             Gets or sets the role this user belongs to
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Policies">
+            <summary>
+            Get polocies for the user
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Key">
+            <summary>
+            Get the key for the object
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Tag">
+            <summary>
+            Get the tag
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.TfaRequestInfo">
@@ -559,6 +604,11 @@
             Get the desired url resource key 
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.IAmiIdentified.Tag">
+            <summary>
+            Gets the tag for the resource
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Logging.LogFileInfo">
             <summary>
             Log file information
@@ -587,6 +637,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.Key">
             <summary>
             Get the requested key
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.Tag">
+            <summary>
+            Gets the ETag
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Security.AuditSubmission">
@@ -633,6 +688,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.Key">
             <summary>
             Get the key for this object
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.Tag">
+            <summary>
+            Gets the ETag
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Security.RevokeReason">
