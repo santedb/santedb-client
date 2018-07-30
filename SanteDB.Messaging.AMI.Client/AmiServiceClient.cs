@@ -37,6 +37,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using SanteDB.Core.Mail;
 using SanteDB.Core.Model.AMI.Collections;
+using SanteDB.Core.Model.Entities;
 
 namespace SanteDB.Messaging.AMI.Client
 {
@@ -815,5 +816,54 @@ namespace SanteDB.Messaging.AMI.Client
             return this.Client.Get<LogFileInfo>($"Log/{logId}");
         }
 
-	}
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public DeviceEntity CreateDeviceEntity(DeviceEntity entity)
+        {
+            return this.Client.Post<DeviceEntity, DeviceEntity>("DeviceEntity", this.Client.Accept, entity);
+        }
+
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public ApplicationEntity CreateApplicationEntity(ApplicationEntity entity)
+        {
+            return this.Client.Post<ApplicationEntity, ApplicationEntity>("ApplicationEntity", this.Client.Accept, entity);
+        }
+
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public DeviceEntity UpdateDeviceEntity(Guid id, DeviceEntity entity)
+        {
+            return this.Client.Put<DeviceEntity, DeviceEntity>($"DeviceEntity/{id}", this.Client.Accept, entity);
+        }
+
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public ApplicationEntity UpdateApplicationEntity(Guid id, ApplicationEntity entity)
+        {
+            return this.Client.Put<ApplicationEntity, ApplicationEntity>($"ApplicationEntity/{id}", this.Client.Accept, entity);
+        }
+
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public AmiCollection GetApplicationEntities(Expression<Func<ApplicationEntity, bool>> expression)
+        {
+            return this.Client.Get<AmiCollection>("ApplicationEntity", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+        }
+
+        /// <summary>
+        /// Create a device entity
+        /// </summary>
+        public AmiCollection GetDeviceEntities(Expression<Func<DeviceEntity, bool>> expression)
+        {
+            return this.Client.Get<AmiCollection>("DeviceEntity", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+        }
+
+
+    }
 }
