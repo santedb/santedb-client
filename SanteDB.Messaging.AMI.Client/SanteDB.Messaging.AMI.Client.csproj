@@ -41,7 +41,6 @@
       <Link>SanteDB.licenseheader</Link>
     </None>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="SanteDB.Messaging.AMI.Client.nuspec">
       <SubType>Designer</SubType>
     </None>
