@@ -864,6 +864,44 @@ namespace SanteDB.Messaging.AMI.Client
             return this.Client.Get<AmiCollection>("DeviceEntity", QueryExpressionBuilder.BuildQuery(expression).ToArray());
         }
 
+        /// <summary>
+        /// Get all applet solutions from server
+        /// </summary>
+        public AmiCollection GetAppletSolutions()
+        {
+            return this.Client.Get<AmiCollection>("AppletSolution");
+        }
 
+        /// <summary>
+        /// Get applet solution
+        /// </summary>
+        public AppletSolution GetAppletSolution(string solutionId)
+        {
+            return this.Client.Get<AppletSolution>($"AppletSolution/{solutionId}");
+        }
+
+        /// <summary>
+        /// Create applet solution
+        /// </summary>
+        public AppletSolution CreateAppletSolution(AppletSolution solution)
+        {
+            return this.Client.Post<AppletSolution, AppletSolution>("AppletSolution", this.Client.Accept, solution);
+        }
+
+        /// <summary>
+        /// Update applet solution
+        /// </summary>
+        public AppletSolution UpdateAppletSolution(AppletSolution solution)
+        {
+            return this.Client.Put<AppletSolution, AppletSolution>($"AppletSolution/{solution.Meta.Id}", this.Client.Accept, solution);
+        }
+
+        /// <summary>
+        /// Obsoletes the applet solution
+        /// </summary>
+        public AppletSolution ObsoleteAppletSolution(string solutionId)
+        {
+            return this.Client.Delete<AppletSolution>($"AppletSolution/{solutionId}");
+        }
     }
 }
