@@ -11,18 +11,18 @@
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class.
+            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Collections.AmiCollection"/> class.
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor(System.Collections.Generic.List{System.Object})">
             <summary>
-            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class
+            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Collections.AmiCollection"/> class
             with a specific list of collection items.
             </summary>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Collections.AmiCollection.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Int32,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="!:AmiCollection&lt;T&gt;"/> class
+            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Collections.AmiCollection"/> class
             with a specific list of collection items.
             </summary>
         </member>
@@ -57,6 +57,7 @@
             with a specific applet manifest instance.
             </summary>
             <param name="info">The applet manifest metadata instance.</param>
+            <param name="publisher">The publisher of the applet</param>
         </member>
         <member name="P:SanteDB.Core.Model.AMI.Applet.AppletManifestInfo.AppletInfo">
             <summary>
@@ -66,6 +67,27 @@
         <member name="P:SanteDB.Core.Model.AMI.Applet.AppletManifestInfo.PublisherData">
             <summary>
             Publisher information if available
+            </summary>
+        </member>
+        <member name="T:SanteDB.Core.Model.AMI.Applet.AppletSolutionInfo">
+            <summary>
+            Represents meta information about a solution
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Applet.AppletSolutionInfo.#ctor">
+            <summary>
+            Applet solution info
+            </summary>
+        </member>
+        <member name="M:SanteDB.Core.Model.AMI.Applet.AppletSolutionInfo.#ctor(SanteDB.Core.Applets.Model.AppletSolution,SanteDB.Core.Model.AMI.Security.X509Certificate2Info)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SanteDB.Core.Model.AMI.Applet.AppletSolutionInfo"/> class
+            with a specific applet manifest instance.
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Applet.AppletSolutionInfo.Include">
+            <summary>
+            Gets the data this includes
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.ISecurityEntityInfo`1">
@@ -504,6 +526,11 @@
             Represents diagnostic service info
             </summary>
         </member>
+        <member name="M:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticServiceInfo.#ctor">
+            <summary>
+            Creates new diagnostic service info
+            </summary>
+        </member>
         <member name="M:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticServiceInfo.#ctor(System.Object)">
             <summary>
             Create the service info
@@ -529,14 +556,29 @@
             Remote sync info
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticSyncInfo.Etag">
+            <summary>
+            Gets or sets the last etag of the sync
+            </summary>
+        </member>
         <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticSyncInfo.Filter">
             <summary>
             Filter used to sync
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticSyncInfo.LastSync">
+            <summary>
+            Gets or sets the last sync time
+            </summary>
+        </member>
         <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticSyncInfo.Name">
             <summary>
             Friendly name of the sync
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticSyncInfo.ResourceName">
+            <summary>
+            Gets or sets the resource name
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticThreadInfo">
@@ -584,14 +626,34 @@
             Version information
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.Copyright">
+            <summary>
+            Gets or sets the copyright statement for the version
+            </summary>
+        </member>
         <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.Info">
             <summary>
             Gets or sets the informational value
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.InformationalVersion">
+            <summary>
+            Gets or sets the human readable name for the version
+            </summary>
+        </member>
         <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.Name">
             <summary>
             Gets or sets the name
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.Product">
+            <summary>
+            Gets or sets the product to which the item belongs
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Diagnostics.DiagnosticVersionInfo.Version">
+            <summary>
+            Gets or sets the version ID of the product
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.IAmiIdentified">
@@ -700,6 +762,46 @@
             The reason something is revoked
             </summary>
         </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.Unspecified">
+            <summary>
+            No reason given
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.KeyCompromise">
+            <summary>
+            The key has been compromised
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.CaCompromise">
+            <summary>
+            The CA itself has been compromised
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.AffiliationChange">
+            <summary>
+            The affiliation of the CA has changed
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.Superseded">
+            <summary>
+            There has been a new certificate issued
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.CessationOfOperation">
+            <summary>
+            The business has ceased operation
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.CertificateHold">
+            <summary>
+            The certificate is under investigation or is held by administrator
+            </summary>
+        </member>
+        <member name="F:SanteDB.Core.Model.AMI.Security.RevokeReason.Reinstate">
+            <summary>
+            Reinstantiate the certificate
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Security.SubmissionInfo">
             <summary>
             Enrollment information
@@ -805,11 +907,19 @@
             Represents the submission result
             </summary>
         </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.SubmissionResult.#ctor">
+            <summary>
+            Creates a new submossion result
+            </summary>
+        </member>
         <member name="M:SanteDB.Core.Model.AMI.Security.SubmissionResult.#ctor(System.String,System.Int32,SanteDB.Core.Model.AMI.Security.SubmissionStatus,System.String)">
             <summary>
             Creates a new client certificate request result based on the internal request response
             </summary>
-            <param name="certificateRequestResponse"></param>
+            <param name="cert">The certificate</param>
+            <param name="id">The id of the certificate</param>
+            <param name="msg">The message for the submission result</param>
+            <param name="outcome">The outcome of the submission</param>
         </member>
         <member name="P:SanteDB.Core.Model.AMI.Security.SubmissionResult.Certificate">
             <summary>
@@ -876,11 +986,20 @@
             Certificate information
             </summary>
         </member>
+        <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor">
+            <summary>
+            Creates a new X509 certificate information class
+            </summary>
+        </member>
         <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String)">
             <summary>
             Constructs a certificate info
             </summary>
-            <param name="cert"></param>
+            <param name="issuer">The issuer of th ecert</param>
+            <param name="naf">The date when the certificate expires</param>
+            <param name="nbf">The date when the certificate was issued</param>
+            <param name="ser">The serial number of the certificate</param>
+            <param name="sub">The subject of the certificate</param>
         </member>
         <member name="M:SanteDB.Core.Model.AMI.Security.X509Certificate2Info.#ctor(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
             <summary>

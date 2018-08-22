@@ -875,33 +875,33 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
         /// Get applet solution
         /// </summary>
-        public AppletSolution GetAppletSolution(string solutionId)
+        public AppletSolutionInfo GetAppletSolution(string solutionId)
         {
-            return this.Client.Get<AppletSolution>($"AppletSolution/{solutionId}");
+            return this.Client.Get<AppletSolutionInfo>($"AppletSolution/{solutionId}");
         }
 
         /// <summary>
         /// Create applet solution
         /// </summary>
-        public AppletSolution CreateAppletSolution(AppletSolution solution)
+        public AppletSolutionInfo CreateAppletSolution(AppletSolution solution)
         {
-            return this.Client.Post<AppletSolution, AppletSolution>("AppletSolution", this.Client.Accept, solution);
+            return this.Client.Post<AppletSolution, AppletSolutionInfo>("AppletSolution", this.Client.Accept, solution);
         }
 
         /// <summary>
         /// Update applet solution
         /// </summary>
-        public AppletSolution UpdateAppletSolution(AppletSolution solution)
+        public AppletSolutionInfo UpdateAppletSolution(String solutionId, AppletSolutionInfo solution)
         {
-            return this.Client.Put<AppletSolution, AppletSolution>($"AppletSolution/{solution.Meta.Id}", this.Client.Accept, solution);
+            return this.Client.Put<AppletSolutionInfo, AppletSolutionInfo>($"AppletSolution/{solutionId}", this.Client.Accept, solution);
         }
 
         /// <summary>
         /// Obsoletes the applet solution
         /// </summary>
-        public AppletSolution ObsoleteAppletSolution(string solutionId)
+        public AppletSolutionInfo ObsoleteAppletSolution(string solutionId)
         {
-            return this.Client.Delete<AppletSolution>($"AppletSolution/{solutionId}");
+            return this.Client.Delete<AppletSolutionInfo>($"AppletSolution/{solutionId}");
         }
     }
 }
