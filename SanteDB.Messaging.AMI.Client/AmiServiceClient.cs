@@ -503,12 +503,22 @@ namespace SanteDB.Messaging.AMI.Client
 			return this.Client.Get<SecurityRoleInfo>($"SecurityRole/{id}");
 		}
 
-		/// <summary>
-		/// Retrieves a specified role.
+        /// <summary>
+		/// Gets a specific role.
 		/// </summary>
-		/// <param name="query">The query expression to use to find the role.</param>
-		/// <returns>Returns a collection of roles which match the specified query parameters.</returns>
-		public AmiCollection GetRoles(Expression<Func<SecurityRole, bool>> query)
+		/// <param name="id">The id of the role to be retrieved.</param>
+		/// <returns>Returns the specified role.</returns>
+		public SecurityRoleInfo GetRole(String roleName)
+        {
+            return this.GetRoles(o => o.Name == roleName).CollectionItem.FirstOrDefault() as SecurityRoleInfo;
+        }
+
+        /// <summary>
+        /// Retrieves a specified role.
+        /// </summary>
+        /// <param name="query">The query expression to use to find the role.</param>
+        /// <returns>Returns a collection of roles which match the specified query parameters.</returns>
+        public AmiCollection GetRoles(Expression<Func<SecurityRole, bool>> query)
 		{
 			return this.Client.Get<AmiCollection>("SecurityRole", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
@@ -902,6 +912,14 @@ namespace SanteDB.Messaging.AMI.Client
         public AppletSolutionInfo ObsoleteAppletSolution(string solutionId)
         {
             return this.Client.Delete<AppletSolutionInfo>($"AppletSolution/{solutionId}");
+        }
+
+        /// <summary>
+        /// Get the specified provenance object
+        /// </summary>
+        public SecurityProvenance GetProvenance(Guid provenanceId)
+        {
+            return this.Client.Get<SecurityProvenance>($"SecurityProvenance/{provenanceId}");
         }
     }
 }
