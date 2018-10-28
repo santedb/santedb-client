@@ -921,5 +921,22 @@ namespace SanteDB.Messaging.AMI.Client
         {
             return this.Client.Get<SecurityProvenance>($"SecurityProvenance/{provenanceId}");
         }
+
+        /// <summary>
+        /// Lock user
+        /// </summary>
+        public SecurityUser LockUser(Guid userId)
+        {
+            return this.Client.Lock<SecurityUser>($"SecurityUser/{userId}");
+        }
+
+        /// <summary>
+        /// Unlock user
+        /// </summary>
+        public SecurityUser UnlockUser(Guid userId)
+        {
+            return this.Client.Unlock<SecurityUser>($"SecurityUser/{userId}");
+        }
+
     }
 }
