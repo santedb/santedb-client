@@ -925,17 +925,17 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
         /// Lock user
         /// </summary>
-        public SecurityUser LockUser(Guid userId)
+        public SecurityUserInfo LockUser(Guid userId)
         {
-            return this.Client.Lock<SecurityUser>($"SecurityUser/{userId}");
+            return this.Client.Lock<SecurityUserInfo>($"SecurityUser/{userId}");
         }
 
         /// <summary>
         /// Unlock user
         /// </summary>
-        public SecurityUser UnlockUser(Guid userId)
+        public SecurityUserInfo UnlockUser(Guid userId)
         {
-            return this.Client.Unlock<SecurityUser>($"SecurityUser/{userId}");
+            return this.Client.Unlock<SecurityUserInfo>($"SecurityUser/{userId}");
         }
 
     }
