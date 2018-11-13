@@ -227,16 +227,6 @@
             Represents a parameter.
             </summary>
         </member>
-        <member name="F:SanteDB.Core.Model.RISI.ReportParameter.parameterType">
-            <summary>
-            The parameter type.
-            </summary>
-        </member>
-        <member name="F:SanteDB.Core.Model.RISI.ReportParameter.parameterTypeKey">
-            <summary>
-            The parameter type key.
-            </summary>
-        </member>
         <member name="F:SanteDB.Core.Model.RISI.ReportParameter.reportDefinition">
             <summary>
             The report definition.

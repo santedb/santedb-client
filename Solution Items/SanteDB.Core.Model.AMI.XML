@@ -140,6 +140,11 @@
             Get the tag
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityApplicationInfo.ModifiedOn">
+            <summary>
+            Get the modified on
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo">
             <summary>
             Represents wrapper information for security devices
@@ -173,6 +178,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.Tag">
             <summary>
             Get the tag
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityDeviceInfo.ModifiedOn">
+            <summary>
+            Get the modified on
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityPolicyInfo">
@@ -260,6 +270,11 @@
             Get the tag
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityRoleInfo.ModifiedOn">
+            <summary>
+            Get the modified on
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo">
             <summary>
             Represents security user information
@@ -303,6 +318,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.Tag">
             <summary>
             Get the tag
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Auth.SecurityUserInfo.ModifiedOn">
+            <summary>
+            Get the modified on
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Auth.TfaRequestInfo">
@@ -671,6 +691,11 @@
             Gets the tag for the resource
             </summary>
         </member>
+        <member name="P:SanteDB.Core.Model.AMI.IAmiIdentified.ModifiedOn">
+            <summary>
+            Get the modified on
+            </summary>
+        </member>
         <member name="T:SanteDB.Core.Model.AMI.Logging.LogFileInfo">
             <summary>
             Log file information
@@ -704,6 +729,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.Tag">
             <summary>
             Gets the ETag
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Logging.LogFileInfo.ModifiedOn">
+            <summary>
+            Get the modified on
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Security.AuditSubmission">
@@ -755,6 +785,11 @@
         <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.Tag">
             <summary>
             Gets the ETag
+            </summary>
+        </member>
+        <member name="P:SanteDB.Core.Model.AMI.Security.AuditInfo.ModifiedOn">
+            <summary>
+            Get the modified on
             </summary>
         </member>
         <member name="T:SanteDB.Core.Model.AMI.Security.RevokeReason">
