@@ -77,12 +77,10 @@
   <ItemGroup>
     <PackageReference Include="MARC.HI.EHRS.SVC.Auditing.Core" Version="2.0.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="SanteDB.Core.Model.RISI">
+      <Version>1.9.6</Version>
+    </PackageReference>
     <PackageReference Include="SharpCompress" Version="0.18.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="SanteDB.Core.Model.RISI">
-      <HintPath>..\Solution Items\SanteDB.Core.Model.RISI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
