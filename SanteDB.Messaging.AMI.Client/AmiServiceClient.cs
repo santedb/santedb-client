@@ -38,6 +38,8 @@ using System.Linq.Expressions;
 using SanteDB.Core.Mail;
 using SanteDB.Core.Model.AMI.Collections;
 using SanteDB.Core.Model.Entities;
+using System.Xml.Serialization;
+using System.Reflection;
 
 namespace SanteDB.Messaging.AMI.Client
 {
@@ -373,6 +375,36 @@ namespace SanteDB.Messaging.AMI.Client
 		{
 			return this.Client.Get<AmiCollection>("SecurityApplication", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
+
+        /// <summary>
+        /// Perform a query
+        /// </summary>
+        public AmiCollection Query<TModel>(Expression<Func<TModel, bool>> expression, int offset, int? count, out int tr, Guid? queryId = null)
+        {
+            // Map the query to HTTP parameters
+            var queryParms = QueryExpressionBuilder.BuildQuery(expression, true).ToList();
+
+            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+
+            if (count.HasValue)
+            {
+                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+            }
+
+            if (queryId.HasValue)
+                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+
+            // Resource name
+            string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
+
+            // The HDSI uses the XMLName as the root of the request
+            var retVal = this.Client.Get<AmiCollection>(resourceName, queryParms.ToArray());
+
+            tr = retVal.Size;
+
+            // Return value
+            return retVal;
+        }
 
 		/// <summary>
 		/// Gets a list of assigning authorities.
