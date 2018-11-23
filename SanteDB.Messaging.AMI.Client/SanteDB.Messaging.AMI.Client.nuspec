@@ -16,7 +16,7 @@
     <tags>CDR SanteDB</tags>
     <dependencies>
       <dependency id="SanteDB.Core.Api" version="1.9.0.0"/>
-      <dependency id="SanteDB.Core.Model.AMI" version="1.9.6.0"/>
+      <dependency id="SanteDB.Core.Model.AMI" version="1.9.8.0"/>
     </dependencies>
   </metadata>
 </package>
