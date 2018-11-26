@@ -39,6 +39,7 @@ using SanteDB.Core.Model.AMI.Collections;
 using SanteDB.Core.Model.Entities;
 using System.Xml.Serialization;
 using System.Reflection;
+using SanteDB.Core.Auditing;
 
 namespace SanteDB.Messaging.AMI.Client
 {
@@ -685,9 +686,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="report">The diagnostic report.</param>
 		/// <returns>Returns the submitted diagnostic report.</returns>
-		public void SubmitAudit(AuditInfo report)
+		public void SubmitAudit(AuditData report)
 		{
-			this.Client.Post<AuditInfo, object>("Audit", this.Client.Accept, report);
+			this.Client.Post<AuditData, object>("Audit", this.Client.Accept, report);
 		}
 
 
@@ -703,18 +704,18 @@ namespace SanteDB.Messaging.AMI.Client
         /// Retrieves an audit
         /// </summary>
         /// <param name="id">The id of the audit to retrieve</param>
-        public AuditInfo GetAudit(Guid id)
+        public AuditData GetAudit(Guid id)
         {
-            return this.Client.Get<AuditInfo>($"Audit/{id}");
+            return this.Client.Get<AuditData>($"Audit/{id}");
         }
 
         /// <summary>
         /// Retrieves an audit
         /// </summary>
         /// <param name="expression">The query to filter audits on</param>
-        public AuditInfo GetAudits(Expression<Func<AuditInfo, bool>> expression)
+        public AuditData GetAudits(Expression<Func<AuditData, bool>> expression)
         {
-            return this.Client.Get<AuditInfo>($"Audit", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+            return this.Client.Get<AuditData>($"Audit", QueryExpressionBuilder.BuildQuery(expression).ToArray());
         }
 
         /// <summary>
