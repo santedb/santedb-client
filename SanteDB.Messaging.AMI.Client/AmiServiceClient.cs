@@ -339,16 +339,6 @@ namespace SanteDB.Messaging.AMI.Client
 		}
 
 		/// <summary>
-		/// Gets a specific applet.
-		/// </summary>
-		/// <param name="id">The id of the applet to retrieve.</param>
-		/// <returns>Returns the applet.</returns>
-		public AppletManifestInfo GetApplet(string id)
-		{
-			return this.Client.Get<AppletManifestInfo>($"Applet/{id}", new KeyValuePair<string, object>("_id", id));
-		}
-
-		/// <summary>
 		/// Gets a list of applets for a specific query.
 		/// </summary>
 		/// <returns>Returns a list of applet which match the specific query.</returns>
