@@ -369,7 +369,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
         /// Perform a query
         /// </summary>
-        public AmiCollection Query<TModel>(Expression<Func<TModel, bool>> expression, int offset, int? count, out int tr, Guid? queryId = null)
+        public AmiCollection Query<TModel>(Expression<Func<TModel, bool>> expression, int offset, int? count, out int tr, Guid? queryId = null, ModelSort<TModel>[] orderBy = null)
         {
             // Map the query to HTTP parameters
             var queryParms = QueryExpressionBuilder.BuildQuery(expression, true).ToList();
@@ -383,6 +383,10 @@ namespace SanteDB.Messaging.AMI.Client
 
             if (queryId.HasValue)
                 queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+
+            if (orderBy != null)
+                foreach (var itm in orderBy)
+                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
