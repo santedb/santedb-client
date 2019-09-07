@@ -514,9 +514,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the policy to be retrieved.</param>
 		/// <returns>Returns the specific policy.</returns>
-		public SecurityPolicyInfo GetPolicy(Guid id)
+		public SecurityPolicy GetPolicy(Guid id)
 		{
-			return this.Client.Get<SecurityPolicyInfo>($"SecurityPolicy/{id}");
+			return this.Client.Get<SecurityPolicy>($"SecurityPolicy/{id}");
 		}
 
 		/// <summary>
