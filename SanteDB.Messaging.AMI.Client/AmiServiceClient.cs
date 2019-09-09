@@ -158,9 +158,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="policy">The policy to be created.</param>
 		/// <returns>Returns the newly created policy.</returns>
-		public SecurityPolicyInfo CreatePolicy(SecurityPolicyInfo policy)
+		public SecurityPolicy CreatePolicy(SecurityPolicy policy)
 		{
-			return this.Client.Post<SecurityPolicyInfo, SecurityPolicyInfo>("SecurityPolicy", this.Client.Accept, policy);
+			return this.Client.Post<SecurityPolicy, SecurityPolicy>("SecurityPolicy", this.Client.Accept, policy);
 		}
 
 		/// <summary>
@@ -259,9 +259,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the policy to be deleted.</param>
 		/// <returns>Returns the deleted policy.</returns>
-		public SecurityPolicyInfo DeletePolicy(Guid id)
+		public SecurityPolicy DeletePolicy(Guid id)
 		{
-			return this.Client.Delete<SecurityPolicyInfo>($"SecurityPolicy/{id}");
+			return this.Client.Delete<SecurityPolicy>($"SecurityPolicy/{id}");
 		}
 
 		/// <summary>
