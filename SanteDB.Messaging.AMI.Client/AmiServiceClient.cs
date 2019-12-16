@@ -389,7 +389,8 @@ namespace SanteDB.Messaging.AMI.Client
                     queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
 
             // Resource name
-            string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
+            string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlRootAttribute>()?.ElementName 
+                ?? typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>()?.TypeName;
 
             // The HDSI uses the XMLName as the root of the request
             var retVal = this.Client.Get<AmiCollection>(resourceName, queryParms.ToArray());
