@@ -646,15 +646,7 @@ namespace SanteDB.Messaging.AMI.Client
 
 		#endregion IDisposable Support
 
-		/// <summary>
-		/// Create security password reset request.
-		/// </summary>
-		/// <param name="resetInfo">The reset information.</param>
-		public void SendTfaSecret(TfaRequestInfo resetInfo)
-		{
-			this.Client.Post<TfaRequestInfo, object>("Tfa", this.Client.Accept, resetInfo);
-		}
-
+		
 		/// <summary>
 		/// Stats the update via a HEAD command
 		/// </summary>
