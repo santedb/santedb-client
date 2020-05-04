@@ -24,7 +24,7 @@
   <PropertyGroup>
     <PackageId>SanteDB.Messaging.AMI.Client</PackageId>
     <Title>SanteDB.Messaging.AMI.Client</Title>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Description>The SanteDB AMI Client API represents a wrapper for the Administrative Management Interface (AMI) REST API on SanteDB Server</Description>
     <Authors>SanteSuite Contributors</Authors>
     <PackageTags>SanteDB</PackageTags>
