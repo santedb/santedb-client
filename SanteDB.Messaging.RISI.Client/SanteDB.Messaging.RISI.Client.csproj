@@ -24,7 +24,7 @@
   <PropertyGroup>
     <PackageId>SanteDB.Messaging.RISI.Client</PackageId>
     <Title>SanteDB.Messaging.RISI.Client</Title>
-    <Version>2.0.10</Version>
+    <Version>2.0.11</Version>
     <Description>SanteDB Report Integration Services Interface (RISI) is a legacy report and adhoc query interface on OpenIZ and SanteDB services</Description>
     <Authors>SanteSuite Contributors</Authors>
     <PackageTags>SanteDB</PackageTags>

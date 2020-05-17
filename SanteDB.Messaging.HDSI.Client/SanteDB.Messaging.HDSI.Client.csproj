@@ -24,7 +24,7 @@
   <PropertyGroup>
     <PackageId>SanteDB.Messaging.HDSI.Client</PackageId>
     <Title>SanteDB.Messaging.HDSI.Client</Title>
-    <Version>2.0.10</Version>
+    <Version>2.0.11</Version>
     <Description>This package provides a C# wrapper around the SanteDB Health Data Services Interface (HDSI) REST Interface which is used for synchronization with a SanteDB Server.</Description>
     <Authors>SanteSuite Contributors</Authors>
     <PackageTags>SanteDB</PackageTags>
