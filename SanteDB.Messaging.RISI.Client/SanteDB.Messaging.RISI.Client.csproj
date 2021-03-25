@@ -20,11 +20,13 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-    
+  <PropertyGroup Condition="'$(VersionNumber)' == ''">
+    <VersionNumber>2.1.0-debug</VersionNumber>
+  </PropertyGroup>
   <PropertyGroup>
     <PackageId>SanteDB.Messaging.RISI.Client</PackageId>
     <Title>SanteDB.Messaging.RISI.Client</Title>
-    <Version>2.1.3</Version>
+    <Version>$(VersionNumber)</Version>
     <Description>SanteDB Report Integration Services Interface (RISI) is a legacy report and adhoc query interface on OpenIZ and SanteDB services</Description>
     <Authors>SanteSuite Contributors</Authors>
     <PackageTags>SanteDB</PackageTags>
@@ -93,16 +95,16 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="SanteDB.Core.Api" Version="2.1.3.0" />
-        <PackageReference Include="SanteDB.Core.Applets" Version="2.1.3.0" />
-        <PackageReference Include="SanteDB.Core.Model" Version="2.1.3.0" />
+        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
+        <PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
+        <PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="SanteDB.Core.Model.RISI">
-      <Version>2.1.3.0</Version>
+      <Version>$(VersionNumber)</Version>
     </PackageReference>
     <PackageReference Include="SharpCompress" Version="0.26.0" />
   </ItemGroup>
