@@ -117,7 +117,7 @@ namespace SanteDB.Messaging.HDSI.Client
             {
                 var bundle = this.Client.Get<Bundle>(url.ToString(), new KeyValuePair<string, object>("_bundle", "true"));
                 bundle?.Reconstitute();
-                return bundle?.Entry as TModel;
+                return bundle?.GetFocalObject() as TModel;
             }
             else
             {
