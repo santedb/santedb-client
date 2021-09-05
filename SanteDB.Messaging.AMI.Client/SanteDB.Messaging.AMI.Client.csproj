@@ -91,6 +91,7 @@
           <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
           <Name>SanteDB.Core.Api</Name>
         </ProjectReference>
+        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.Ami\SanteDB.Core.Model.Ami.csproj"/>
       </ItemGroup>
     </When>
     <Otherwise>
@@ -98,14 +99,15 @@
         <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
         <PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
         <PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
+        <PackageReference Include="SanteDB.Core.Model.AMI">
+          <Version>$(VersionNumber)</Version>
+        </PackageReference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="SanteDB.Core.Model.AMI">
-      <Version>$(VersionNumber)</Version>
-    </PackageReference>
+   
     <PackageReference Include="SharpCompress" Version="0.28.3" />
   </ItemGroup>
   <!-- <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" /> -->
