@@ -106,7 +106,7 @@
     <PackageReference Include="SanteDB.Core.Model.RISI">
       <Version>$(VersionNumber)</Version>
     </PackageReference>
-    <PackageReference Include="SharpCompress" Version="0.28.3" />
+    <PackageReference Include="SharpCompress" Version="0.29.0" />
   </ItemGroup>
   <!-- <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
