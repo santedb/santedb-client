@@ -91,7 +91,7 @@
           <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
           <Name>SanteDB.Core.Api</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.Ami\SanteDB.Core.Model.Ami.csproj"/>
+        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.Ami\SanteDB.Core.Model.Ami.csproj" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -108,7 +108,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
    
-    <PackageReference Include="SharpCompress" Version="0.28.3" />
+    <PackageReference Include="SharpCompress" Version="0.30.0" />
   </ItemGroup>
   <!-- <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
