@@ -1,21 +1,22 @@
 ﻿/*
  * Copyright (C) 2019 - 2021, Fyfe Software Inc. and the SanteSuite Contributors (See NOTICE.md)
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you
+ * may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * User: fyfej
  * Date: 2021-2-9
  */
+
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
@@ -46,7 +47,6 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="client">The <see cref="IRestClient"/> instance.</param>
         public HdsiServiceClient(IRestClient client) : base(client)
         {
-            this.Client.Accept = client.Accept ?? "application/xml";
         }
 
         /// <summary>
@@ -79,14 +79,14 @@ namespace SanteDB.Messaging.HDSI.Client
             // Create with version?
             if (data.Key != null && !asBundle)
             {
-                return this.Client.Post<TModel, TModel>(String.Format("{0}/{1}", resourceName, data.Key), this.Client.Accept, data);
+                return this.Client.Post<TModel, TModel>(String.Format("{0}/{1}", resourceName, data.Key), data);
             }
             else
             {
                 if (asBundle)
-                    return this.Client.Post<Bundle, TModel>(resourceName, this.Client.Accept, Bundle.CreateBundle(data));
+                    return this.Client.Post<Bundle, TModel>(resourceName, Bundle.CreateBundle(data));
                 else
-                    return this.Client.Post<TModel, TModel>(resourceName, this.Client.Accept, data);
+                    return this.Client.Post<TModel, TModel>(resourceName, data);
             }
         }
 
@@ -209,7 +209,7 @@ namespace SanteDB.Messaging.HDSI.Client
             if (queryId.HasValue)
                 queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
 
-            if(orderBy != null)
+            if (orderBy != null)
             {
                 foreach (var itm in orderBy)
                     queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
@@ -253,7 +253,7 @@ namespace SanteDB.Messaging.HDSI.Client
 
             if (queryId.HasValue)
                 queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
-            
+
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
@@ -309,8 +309,8 @@ namespace SanteDB.Messaging.HDSI.Client
             }
 
             return asBundle ?
-                this.Client.Put<Bundle, TModel>(String.Format("{0}/{1}", resourceName, data.Key.Value), this.Client.Accept, Bundle.CreateBundle(data)) :
-                this.Client.Put<TModel, TModel>(String.Format("{0}/{1}", resourceName, data.Key.Value), this.Client.Accept, data);
+                this.Client.Put<Bundle, TModel>(String.Format("{0}/{1}", resourceName, data.Key.Value), Bundle.CreateBundle(data)) :
+                this.Client.Put<TModel, TModel>(String.Format("{0}/{1}", resourceName, data.Key.Value), data);
         }
 
         /// <summary>
@@ -340,10 +340,9 @@ namespace SanteDB.Messaging.HDSI.Client
             var sPatch = patch.Clone() as Patch;
             sPatch.AppliesTo = null;
 
-            var version = this.Client.Patch<Patch>($"{resourceName}/{key.Value}", this.Client.Accept, tag, sPatch);
+            var version = this.Client.Patch<Patch>($"{resourceName}/{key.Value}", tag, sPatch);
 
             return Guid.ParseExact(version, "N");
-
         }
 
         /// <summary>
@@ -369,7 +368,6 @@ namespace SanteDB.Messaging.HDSI.Client
         {
             return this.Client.Options<ServiceOptions>("/");
         }
-
 
         #region IDisposable Support
 
