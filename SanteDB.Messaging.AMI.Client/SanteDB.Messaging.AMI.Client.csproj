@@ -79,6 +79,8 @@
   <Choose>
     <When Condition="$(SolutionName.Contains('-ext'))">
       <ItemGroup>
+        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.AMI\SanteDB.Core.Model.AMI.csproj" />
+
         <ProjectReference Include="..\..\santedb-model\SanteDB.Core.Model\SanteDB.Core.Model.csproj">
           <Project>{F1A82A4F-4A57-47D7-AE76-444C8A4FF54A}</Project>
           <Name>SanteDB.Core.Model</Name>
@@ -110,6 +112,7 @@
 
     <PackageReference Include="SharpCompress" Version="0.30.0" />
   </ItemGroup>
+
   <!-- <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" /> -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

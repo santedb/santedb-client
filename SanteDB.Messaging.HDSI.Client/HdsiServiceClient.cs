@@ -113,16 +113,7 @@ namespace SanteDB.Messaging.HDSI.Client
             }
 
             // Optimize?
-            if (this.Client.Description.Binding.Optimize)
-            {
-                var bundle = this.Client.Get<Bundle>(url.ToString(), new KeyValuePair<string, object>("_bundle", "true"));
-                bundle?.Reconstitute();
-                return bundle?.GetFocalObject() as TModel;
-            }
-            else
-            {
-                return this.Client.Get<TModel>(url.ToString());
-            }
+            return this.Client.Get<TModel>(url.ToString());
         }
 
         /// <summary>
