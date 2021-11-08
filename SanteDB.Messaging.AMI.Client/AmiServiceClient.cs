@@ -665,15 +665,15 @@ namespace SanteDB.Messaging.AMI.Client
             };
         }
 
-		/// <summary>
-		/// Submits a diagnostic report.
-		/// </summary>
-		/// <param name="report">The diagnostic report.</param>
-		/// <returns>Returns the submitted diagnostic report.</returns>
-		public void SubmitAudit(AuditEventData report)
-		{
-			this.Client.Post<AuditEventData, object>("Audit", this.Client.Accept, report);
-		}
+        /// <summary>
+        /// Submits a diagnostic report.
+        /// </summary>
+        /// <param name="report">The diagnostic report.</param>
+        /// <returns>Returns the submitted diagnostic report.</returns>
+        public void SubmitAudit(AuditEventData report)
+        {
+            this.Client.Post<AuditEventData, object>("Audit", report);
+        }
 
         /// <summary>
         /// Submits a diagnostic report.
