@@ -18,25 +18,28 @@
  */
 
 using SanteDB.Core.Applets.Model;
+using SanteDB.Core.Auditing;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
+using SanteDB.Core.Mail;
 using SanteDB.Core.Model.AMI.Applet;
 using SanteDB.Core.Model.AMI.Auth;
+using SanteDB.Core.Model.AMI.Collections;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
 using SanteDB.Core.Model.DataTypes;
+using SanteDB.Core.Model.Entities;
 using SanteDB.Core.Model.Query;
 using SanteDB.Core.Model.Security;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using SanteDB.Core.Mail;
-using SanteDB.Core.Model.AMI.Collections;
-using SanteDB.Core.Model.Entities;
+using System.Reflection;
 using System.Xml.Serialization;
 using System.Reflection;
 using SanteDB.Core.Model.Audit;
@@ -46,6 +49,7 @@ namespace SanteDB.Messaging.AMI.Client
     /// <summary>
     /// Represents the AMI service client.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class AmiServiceClient : ServiceClientBase, IDisposable
     {
         /// <summary>

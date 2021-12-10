@@ -24,9 +24,9 @@ using SanteDB.Core.Model;
 using SanteDB.Core.Model.Collection;
 using SanteDB.Core.Model.Patch;
 using SanteDB.Core.Model.Query;
-using SanteDB.Core.Model.Roles;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -38,6 +38,7 @@ namespace SanteDB.Messaging.HDSI.Client
     /// <summary>
     /// Represents the HDSI service client.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class HdsiServiceClient : ServiceClientBase, IDisposable
     {
         /// <summary>
