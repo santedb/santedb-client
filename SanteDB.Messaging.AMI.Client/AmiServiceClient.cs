@@ -18,7 +18,7 @@
  */
 
 using SanteDB.Core.Applets.Model;
-using SanteDB.Core.Auditing;
+using SanteDB.Core.Model.Audit;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
