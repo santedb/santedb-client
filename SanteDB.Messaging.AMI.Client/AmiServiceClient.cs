@@ -77,9 +77,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="id">The id of the assigning authority to retrieve.</param>
         /// <returns>Returns the assigning authority.</returns>
-        public AssigningAuthority AssigningAuthority(Guid id)
+        public IdentityDomain AssigningAuthority(Guid id)
         {
-            return this.Client.Get<AssigningAuthority>($"AssigningAuthority/{id}");
+            return this.Client.Get<IdentityDomain>($"AssigningAuthority/{id}");
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="assigningAuthorityInfo">The assigning authority to be created.</param>
         /// <returns>Returns the created assigning authority.</returns>
-        public AssigningAuthority CreateAssigningAuthority(AssigningAuthority assigningAuthorityInfo)
+        public IdentityDomain CreateAssigningAuthority(IdentityDomain assigningAuthorityInfo)
         {
-            return this.Client.Post<AssigningAuthority, AssigningAuthority>("AssigningAuthority", assigningAuthorityInfo);
+            return this.Client.Post<IdentityDomain, IdentityDomain>("AssigningAuthority", assigningAuthorityInfo);
         }
 
         /// <summary>
@@ -211,9 +211,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="assigningAuthorityId">The id of the assigning authority to be deleted.</param>
         /// <returns>Returns the deleted assigning authority.</returns>
-        public AssigningAuthority DeleteAssigningAuthority(Guid assigningAuthorityId)
+        public IdentityDomain DeleteAssigningAuthority(Guid assigningAuthorityId)
         {
-            return this.Client.Delete<AssigningAuthority>($"AssigningAuthority/{assigningAuthorityId}");
+            return this.Client.Delete<IdentityDomain>($"AssigningAuthority/{assigningAuthorityId}");
         }
 
         /// <summary>
@@ -409,7 +409,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="query">The query expression to use to find the assigning authorities.</param>
         /// <returns>Returns a collection of assigning authorities which match the specified criteria.</returns>
-        public AmiCollection GetAssigningAuthorities(Expression<Func<AssigningAuthority, bool>> query)
+        public AmiCollection GetAssigningAuthorities(Expression<Func<IdentityDomain, bool>> query)
         {
             return this.Client.Get<AmiCollection>("AssigningAuthority", QueryExpressionBuilder.BuildQuery(query).ToArray());
         }
@@ -770,9 +770,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// <param name="assigningAuthorityId">The id of the assigning authority to be updated.</param>
         /// <param name="assigningAuthorityInfo">The assigning authority info containing the updated information.</param>
         /// <returns>Returns the updated assigning authority.</returns>
-        public AssigningAuthority UpdateAssigningAuthority(Guid assigningAuthorityId, AssigningAuthority assigningAuthorityInfo)
+        public IdentityDomain UpdateAssigningAuthority(Guid assigningAuthorityId, IdentityDomain assigningAuthorityInfo)
         {
-            return this.Client.Put<AssigningAuthority, AssigningAuthority>($"AssigningAuthority/{assigningAuthorityId}", assigningAuthorityInfo);
+            return this.Client.Put<IdentityDomain, IdentityDomain>($"AssigningAuthority/{assigningAuthorityId}", assigningAuthorityInfo);
         }
 
         /// <summary>
