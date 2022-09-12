@@ -187,25 +187,25 @@ namespace SanteDB.Messaging.HDSI.Client
             // Map the query to HTTP parameters
             var queryParms = QueryExpressionBuilder.BuildQuery(query, true).ToList();
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms.Add(new KeyValuePair<string, string>("_offset", offset.ToString()));
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms.Add(new KeyValuePair<string, string>("_count", count.ToString()));
             }
 
             if (all)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_all", true));
+                queryParms.Add(new KeyValuePair<string, string>("_all", true.ToString()));
             }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+                queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                    queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
             }
 
             // Resource name
@@ -232,25 +232,25 @@ namespace SanteDB.Messaging.HDSI.Client
             // Map the query to HTTP parameters
             var queryParms = QueryExpressionBuilder.BuildQuery(query, true).ToList();
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms.Add(new KeyValuePair<string, string>("_offset", offset.ToString()));
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms.Add(new KeyValuePair<string, string>("_count", count.ToString()));
             }
 
             if (expandProperties != null && expandProperties.Length > 0)
             {
-                queryParms.AddRange(expandProperties.Select(i => new KeyValuePair<string, object>("_expand", i)));
+                queryParms.AddRange(expandProperties.Select(i => new KeyValuePair<string, string>("_expand", i)));
             }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+                queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                    queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
             }
 
             // Resource name

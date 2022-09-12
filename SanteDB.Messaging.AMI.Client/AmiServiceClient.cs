@@ -347,7 +347,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a list of applet which match the specific query.</returns>
         public AmiCollection GetApplets()
         {
-            return this.Client.Get<AmiCollection>("Applet", new KeyValuePair<string, object>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
+            return this.Client.Get<AmiCollection>("Applet", new KeyValuePair<string, string>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
         }
 
         /// <summary>
@@ -377,19 +377,19 @@ namespace SanteDB.Messaging.AMI.Client
             // Map the query to HTTP parameters
             var queryParms = QueryExpressionBuilder.BuildQuery(expression, true).ToList();
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms.Add(new KeyValuePair<string, string>("_offset", offset.ToString()));
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms.Add(new KeyValuePair<string, string>("_count", count.ToString()));
             }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+                queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
 
             if (orderBy != null)
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                    queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlRootAttribute>()?.ElementName
@@ -420,7 +420,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of certificates which match the specified query.</returns>
         public AmiCollection GetCertificates()
         {
-            return this.Client.Get<AmiCollection>("Certificate", new KeyValuePair<string, object>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
+            return this.Client.Get<AmiCollection>("Certificate", new KeyValuePair<string, string>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
         }
 
         /// <summary>
