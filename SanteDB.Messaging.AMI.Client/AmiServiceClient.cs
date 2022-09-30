@@ -19,7 +19,6 @@
  * Date: 2022-5-30
  */
 using SanteDB.Core.Applets.Model;
-using SanteDB.Core.Model.Audit;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
@@ -30,6 +29,7 @@ using SanteDB.Core.Model.AMI.Collections;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
+using SanteDB.Core.Model.Audit;
 using SanteDB.Core.Model.DataTypes;
 using SanteDB.Core.Model.Entities;
 using SanteDB.Core.Model.Query;
@@ -42,8 +42,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Xml.Serialization;
-using System.Reflection;
-using SanteDB.Core.Model.Audit;
 
 namespace SanteDB.Messaging.AMI.Client
 {
@@ -385,11 +383,17 @@ namespace SanteDB.Messaging.AMI.Client
             }
 
             if (queryId.HasValue)
+            {
                 queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
+            }
 
             if (orderBy != null)
+            {
                 foreach (var itm in orderBy)
+                {
                     queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                }
+            }
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlRootAttribute>()?.ElementName
@@ -536,7 +540,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
 		/// Gets a specific role.
 		/// </summary>
-		/// <param name="id">The id of the role to be retrieved.</param>
+		/// <param name="roleName">The id of the role to be retrieved.</param>
 		/// <returns>Returns the specified role.</returns>
 		public SecurityRoleInfo GetRole(String roleName)
         {
@@ -730,7 +734,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// Updates an alert.
         /// </summary>
         /// <param name="messageId">The id of the alert to be updated.</param>
-        /// <param name="alertMessageInfo">The alert message info containing the updated information.</param>
+        /// <param name="mailMessage">The alert message info containing the updated information.</param>
         /// <returns>Returns the updated alert.</returns>
         public MailMessage UpdateMailMessage(Guid messageId, MailMessage mailMessage)
         {

@@ -86,9 +86,13 @@ namespace SanteDB.Messaging.HDSI.Client
             else
             {
                 if (asBundle)
+                {
                     return this.Client.Post<Bundle, TModel>(resourceName, Bundle.CreateBundle(data));
+                }
                 else
+                {
                     return this.Client.Post<TModel, TModel>(resourceName, data);
+                }
             }
         }
 
@@ -200,12 +204,16 @@ namespace SanteDB.Messaging.HDSI.Client
             }
 
             if (queryId.HasValue)
+            {
                 queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
+            }
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
+                {
                     queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                }
             }
 
             // Resource name
@@ -245,12 +253,16 @@ namespace SanteDB.Messaging.HDSI.Client
             }
 
             if (queryId.HasValue)
+            {
                 queryParms.Add(new KeyValuePair<string, string>("_queryId", queryId.ToString()));
+            }
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
+                {
                     queryParms.Add(new KeyValuePair<string, string>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                }
             }
 
             // Resource name
