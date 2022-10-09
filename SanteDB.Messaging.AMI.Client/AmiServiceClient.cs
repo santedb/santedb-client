@@ -119,9 +119,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="assigningAuthorityInfo">The assigning authority to be created.</param>
         /// <returns>Returns the created assigning authority.</returns>
-        public IdentityDomain CreateAssigningAuthority(IdentityDomain assigningAuthorityInfo)
+        public IdentityDomain CreateIdentityDomain(IdentityDomain assigningAuthorityInfo)
         {
-            return this.Client.Post<IdentityDomain, IdentityDomain>("AssigningAuthority", assigningAuthorityInfo);
+            return this.Client.Post<IdentityDomain, IdentityDomain>("IdentityDomain", assigningAuthorityInfo);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		public DiagnosticReport GetServerDiagnoticReport()
         {
-            return this.Client.Get<DiagnosticReport>($"Sherlock");
+            return this.Client.Get<DiagnosticReport>($"Sherlock/system");
         }
 
         /// <summary>
@@ -413,9 +413,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="query">The query expression to use to find the assigning authorities.</param>
         /// <returns>Returns a collection of assigning authorities which match the specified criteria.</returns>
-        public AmiCollection GetAssigningAuthorities(Expression<Func<IdentityDomain, bool>> query)
+        public AmiCollection GetIdentityDomains(Expression<Func<IdentityDomain, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("AssigningAuthority", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("IdentityDomain", QueryExpressionBuilder.BuildQuery(query).ToArray());
         }
 
         /// <summary>
