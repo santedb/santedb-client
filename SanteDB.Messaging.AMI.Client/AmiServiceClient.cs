@@ -32,6 +32,7 @@ using SanteDB.Core.Model.AMI.Security;
 using SanteDB.Core.Model.Audit;
 using SanteDB.Core.Model.DataTypes;
 using SanteDB.Core.Model.Entities;
+using SanteDB.Core.Model.Interfaces;
 using SanteDB.Core.Model.Query;
 using SanteDB.Core.Model.Security;
 using System;
@@ -960,6 +961,18 @@ namespace SanteDB.Messaging.AMI.Client
         public SecurityUserInfo UnlockUser(Guid userId)
         {
             return this.Client.Unlock<SecurityUserInfo>($"SecurityUser/{userId}");
+        }
+
+        /// <summary>
+        /// Add policy <paramref name="policyOid"/> to <paramref name="securable"/>
+        /// </summary>
+        public void AddPolicy(IIdentifiedData securable, string policyOid, PolicyGrantType rule)
+        {
+            this.Client.Post<SecurityPolicyInfo, SecurityPolicyInfo>($"{securable.GetType().GetSerializationName()}/{securable.Key}/policy", new SecurityPolicyInfo()
+            {
+                Oid = policyOid,
+                Grant = rule
+            });
         }
     }
 }

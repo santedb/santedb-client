@@ -103,7 +103,7 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="key">The key of the data.</param>
         /// <param name="versionKey">The version key of the data.</param>
         /// <returns>Returns the specified data.</returns>
-        public IdentifiedData Get<TModel>(Guid key, Guid? versionKey) where TModel : IdentifiedData
+        public TModel Get<TModel>(Guid key, Guid? versionKey) where TModel : IdentifiedData
         {
             // Resource name
             String resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
