@@ -35,6 +35,7 @@ using SanteDB.Core.Model.Entities;
 using SanteDB.Core.Model.Interfaces;
 using SanteDB.Core.Model.Query;
 using SanteDB.Core.Model.Security;
+using SanteDB.Core.Model.Subscription;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -557,6 +558,18 @@ namespace SanteDB.Messaging.AMI.Client
         {
             return this.Client.Get<AmiCollection>("Tfa");
         }
+
+        /// <summary>
+        /// Gets a list of subscriptions.
+        /// </summary>
+        /// <returns></returns>
+        public AmiCollection GetSubscriptionDefinitions() => this.Client.Get<AmiCollection>("SubscriptionDefinition");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SubscriptionDefinition GetSubscriptionDefinition(Guid id) => this.Client.Get<SubscriptionDefinition>($"SubscriptionDefinition/{id}");
 
         /// <summary>
         /// Gets a specific user.
