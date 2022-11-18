@@ -38,6 +38,7 @@ using SanteDB.Core.Model.Security;
 using SanteDB.Core.Model.Subscription;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,22 @@ namespace SanteDB.Messaging.AMI.Client
         public SubmissionResult AcceptCertificateSigningRequest(string id)
         {
             return this.Client.Put<object, SubmissionResult>($"Csr/{id}", null);
+        }
+
+        /// <summary>
+        /// Add users to role
+        /// </summary>
+        public void AddUsersToRole(String roleName, string[] userNames)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "1";
+            query["name"] = roleName;
+            var roleId = this.Client.Get<AmiCollection>($"{typeof(SecurityRole).GetSerializationName()}", query).CollectionItem.OfType<SecurityRoleInfo>().FirstOrDefault()?.Key;
+            if(roleId == null)
+            {
+                throw new KeyNotFoundException(roleName);
+            }
+            this.Client.Post<AmiCollection, SecurityRole>($"{typeof(SecurityRole).GetSerializationName()}/{roleId}/user", new AmiCollection(userNames.Select(o => new SecurityUser() { UserName = o })));
         }
 
         /// <summary>
@@ -167,6 +184,19 @@ namespace SanteDB.Messaging.AMI.Client
         }
 
         /// <summary>
+        /// Returns true if <paramref name="userName"/> is in <paramref name="roleName"/>
+        /// </summary>
+        public bool IsUserInRole(string userName, string roleName)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "0";
+            query["_includeTotal"] = "true";
+            query["userName"] = userName;
+            query["roles.name"] = roleName;
+            return this.Client.Get<AmiCollection>($"{typeof(SecurityUser).GetSerializationName()}", query).Size > 0;
+        }
+
+        /// <summary>
         /// Creates a role in the IMS.
         /// </summary>
         /// <param name="role">The role to be created.</param>
@@ -184,6 +214,25 @@ namespace SanteDB.Messaging.AMI.Client
         public SecurityUserInfo CreateUser(SecurityUserInfo user)
         {
             return this.Client.Post<SecurityUserInfo, SecurityUserInfo>("SecurityUser", user);
+        }
+
+        /// <summary>
+        /// Remove users from role
+        /// </summary>
+        public void RemoveUsersFromRole(string roleName, string[] users)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "1";
+            query["name"] = roleName;
+            var roleId = this.Client.Get<AmiCollection>($"{typeof(SecurityRole).GetSerializationName()}", query).CollectionItem.OfType<SecurityRoleInfo>().FirstOrDefault()?.Key;
+            if (roleId == null)
+            {
+                throw new KeyNotFoundException(roleName);
+            }
+            foreach (var user in users)
+            {
+                this.Client.Delete<SecurityRole>($"{typeof(SecurityRole).GetSerializationName()}/{roleId}/user/{user}");
+            }
         }
 
         /// <summary>
