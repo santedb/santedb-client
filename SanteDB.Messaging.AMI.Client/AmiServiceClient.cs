@@ -1020,7 +1020,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
         /// Add policy <paramref name="policyOid"/> to <paramref name="securable"/>
         /// </summary>
-        public void AddPolicy(IIdentifiedData securable, string policyOid, PolicyGrantType rule)
+        public void AddPolicy(IAnnotatedResource securable, string policyOid, PolicyGrantType rule)
         {
             this.Client.Post<SecurityPolicyInfo, SecurityPolicyInfo>($"{securable.GetType().GetSerializationName()}/{securable.Key}/policy", new SecurityPolicyInfo()
             {
