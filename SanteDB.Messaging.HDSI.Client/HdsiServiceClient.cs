@@ -16,7 +16,7 @@
  * the License.
  * 
  * User: fyfej
- * Date: 2021-10-26
+ * Date: 2022-5-30
  */
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
@@ -86,9 +86,13 @@ namespace SanteDB.Messaging.HDSI.Client
             else
             {
                 if (asBundle)
+                {
                     return this.Client.Post<Bundle, TModel>(resourceName, Bundle.CreateBundle(data));
+                }
                 else
+                {
                     return this.Client.Post<TModel, TModel>(resourceName, data);
+                }
             }
         }
 
@@ -99,7 +103,7 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="key">The key of the data.</param>
         /// <param name="versionKey">The version key of the data.</param>
         /// <returns>Returns the specified data.</returns>
-        public IdentifiedData Get<TModel>(Guid key, Guid? versionKey) where TModel : IdentifiedData
+        public TModel Get<TModel>(Guid key, Guid? versionKey) where TModel : IdentifiedData
         {
             // Resource name
             String resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
@@ -185,34 +189,38 @@ namespace SanteDB.Messaging.HDSI.Client
         public Bundle Query<TModel>(Expression<Func<TModel, bool>> query, int offset, int? count, bool all, Guid? queryId = null, ModelSort<TModel>[] orderBy = null) where TModel : IdentifiedData
         {
             // Map the query to HTTP parameters
-            var queryParms = QueryExpressionBuilder.BuildQuery(query, true).ToList();
+            var queryParms = QueryExpressionBuilder.BuildQuery(query, true);
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms["_offset"] = offset.ToString();
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms["_count"] = count.ToString();
             }
 
             if (all)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_all", true));
+                queryParms["_all"] = true.ToString();
             }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+            {
+                queryParms["_queryId"] = queryId.ToString();
+            }
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                {
+                    queryParms["_orderBy"]= QueryExpressionBuilder.BuildSortExpression(itm);
+                }
             }
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
 
             // The HDSI uses the XMLName as the root of the request
-            var retVal = this.Client.Get<Bundle>(resourceName, queryParms.ToArray());
+            var retVal = this.Client.Get<Bundle>(resourceName, queryParms);
 
             // Return value
             return retVal;
@@ -227,37 +235,37 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="count">The count of the query results.</param>
         /// <param name="expandProperties">An property traversal for which to expand upon.</param>
         /// <returns>Returns a Bundle containing the data.</returns>
-        public Bundle Query<TModel>(Expression<Func<TModel, bool>> query, int offset, int? count, string[] expandProperties = null, Guid? queryId = null, ModelSort<TModel>[] orderBy = null) where TModel : IdentifiedData
+        public Bundle Query<TModel>(Expression<Func<TModel, bool>> query, int offset, int? count, Guid? queryId = null, ModelSort<TModel>[] orderBy = null) where TModel : IdentifiedData
         {
             // Map the query to HTTP parameters
-            var queryParms = QueryExpressionBuilder.BuildQuery(query, true).ToList();
+            var queryParms = QueryExpressionBuilder.BuildQuery(query, true);
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms["_offset"]= offset.ToString();
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms["_count"]= count.ToString();
             }
 
-            if (expandProperties != null && expandProperties.Length > 0)
-            {
-                queryParms.AddRange(expandProperties.Select(i => new KeyValuePair<string, object>("_expand", i)));
-            }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+            {
+                queryParms["_queryId"]=queryId.ToString();
+            }
 
             if (orderBy != null)
             {
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                {
+                    queryParms.Add("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm));
+                }
             }
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>().TypeName;
 
             // The HDSI uses the XMLName as the root of the request
-            var retVal = this.Client.Get<Bundle>(resourceName, queryParms.ToArray());
+            var retVal = this.Client.Get<Bundle>(resourceName, queryParms);
 
             // Return value
             return retVal;

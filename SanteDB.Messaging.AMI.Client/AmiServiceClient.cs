@@ -16,10 +16,9 @@
  * the License.
  * 
  * User: fyfej
- * Date: 2021-10-26
+ * Date: 2022-5-30
  */
 using SanteDB.Core.Applets.Model;
-using SanteDB.Core.Auditing;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
@@ -30,12 +29,16 @@ using SanteDB.Core.Model.AMI.Collections;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
+using SanteDB.Core.Model.Audit;
 using SanteDB.Core.Model.DataTypes;
 using SanteDB.Core.Model.Entities;
+using SanteDB.Core.Model.Interfaces;
 using SanteDB.Core.Model.Query;
 using SanteDB.Core.Model.Security;
+using SanteDB.Core.Model.Subscription;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -71,13 +74,29 @@ namespace SanteDB.Messaging.AMI.Client
         }
 
         /// <summary>
+        /// Add users to role
+        /// </summary>
+        public void AddUsersToRole(String roleName, string[] userNames)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "1";
+            query["name"] = roleName;
+            var roleId = this.Client.Get<AmiCollection>($"{typeof(SecurityRole).GetSerializationName()}", query).CollectionItem.OfType<SecurityRoleInfo>().FirstOrDefault()?.Key;
+            if(roleId == null)
+            {
+                throw new KeyNotFoundException(roleName);
+            }
+            this.Client.Post<AmiCollection, SecurityRole>($"{typeof(SecurityRole).GetSerializationName()}/{roleId}/user", new AmiCollection(userNames.Select(o => new SecurityUser() { UserName = o })));
+        }
+
+        /// <summary>
         /// Gets a specific assigning authority.
         /// </summary>
         /// <param name="id">The id of the assigning authority to retrieve.</param>
         /// <returns>Returns the assigning authority.</returns>
-        public AssigningAuthority AssigningAuthority(Guid id)
+        public IdentityDomain AssigningAuthority(Guid id)
         {
-            return this.Client.Get<AssigningAuthority>($"AssigningAuthority/{id}");
+            return this.Client.Get<IdentityDomain>($"AssigningAuthority/{id}");
         }
 
         /// <summary>
@@ -119,9 +138,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="assigningAuthorityInfo">The assigning authority to be created.</param>
         /// <returns>Returns the created assigning authority.</returns>
-        public AssigningAuthority CreateAssigningAuthority(AssigningAuthority assigningAuthorityInfo)
+        public IdentityDomain CreateIdentityDomain(IdentityDomain assigningAuthorityInfo)
         {
-            return this.Client.Post<AssigningAuthority, AssigningAuthority>("AssigningAuthority", assigningAuthorityInfo);
+            return this.Client.Post<IdentityDomain, IdentityDomain>("IdentityDomain", assigningAuthorityInfo);
         }
 
         /// <summary>
@@ -165,6 +184,19 @@ namespace SanteDB.Messaging.AMI.Client
         }
 
         /// <summary>
+        /// Returns true if <paramref name="userName"/> is in <paramref name="roleName"/>
+        /// </summary>
+        public bool IsUserInRole(string userName, string roleName)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "0";
+            query["_includeTotal"] = "true";
+            query["userName"] = userName;
+            query["roles.name"] = roleName;
+            return this.Client.Get<AmiCollection>($"{typeof(SecurityUser).GetSerializationName()}", query).Size > 0;
+        }
+
+        /// <summary>
         /// Creates a role in the IMS.
         /// </summary>
         /// <param name="role">The role to be created.</param>
@@ -182,6 +214,25 @@ namespace SanteDB.Messaging.AMI.Client
         public SecurityUserInfo CreateUser(SecurityUserInfo user)
         {
             return this.Client.Post<SecurityUserInfo, SecurityUserInfo>("SecurityUser", user);
+        }
+
+        /// <summary>
+        /// Remove users from role
+        /// </summary>
+        public void RemoveUsersFromRole(string roleName, string[] users)
+        {
+            var query = new NameValueCollection();
+            query["_count"] = "1";
+            query["name"] = roleName;
+            var roleId = this.Client.Get<AmiCollection>($"{typeof(SecurityRole).GetSerializationName()}", query).CollectionItem.OfType<SecurityRoleInfo>().FirstOrDefault()?.Key;
+            if (roleId == null)
+            {
+                throw new KeyNotFoundException(roleName);
+            }
+            foreach (var user in users)
+            {
+                this.Client.Delete<SecurityRole>($"{typeof(SecurityRole).GetSerializationName()}/{roleId}/user/{user}");
+            }
         }
 
         /// <summary>
@@ -209,9 +260,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="assigningAuthorityId">The id of the assigning authority to be deleted.</param>
         /// <returns>Returns the deleted assigning authority.</returns>
-        public AssigningAuthority DeleteAssigningAuthority(Guid assigningAuthorityId)
+        public IdentityDomain DeleteAssigningAuthority(Guid assigningAuthorityId)
         {
-            return this.Client.Delete<AssigningAuthority>($"AssigningAuthority/{assigningAuthorityId}");
+            return this.Client.Delete<IdentityDomain>($"AssigningAuthority/{assigningAuthorityId}");
         }
 
         /// <summary>
@@ -300,7 +351,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         public AmiCollection FindPolicy(Expression<Func<SecurityPolicy, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityPolicy", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityPolicy", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -308,7 +359,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         public AmiCollection FindRole(Expression<Func<SecurityRole, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityRole", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityRole", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -326,7 +377,7 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		public DiagnosticReport GetServerDiagnoticReport()
         {
-            return this.Client.Get<DiagnosticReport>($"Sherlock");
+            return this.Client.Get<DiagnosticReport>($"Sherlock/system");
         }
 
         /// <summary>
@@ -336,7 +387,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of alerts which match the specified criteria.</returns>
         public AmiCollection GetMailMessages(Expression<Func<MailMessage, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("MailMessage", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("MailMessage", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -345,7 +396,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a list of applet which match the specific query.</returns>
         public AmiCollection GetApplets()
         {
-            return this.Client.Get<AmiCollection>("Applet", new KeyValuePair<string, object>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
+            return this.Client.Get<AmiCollection>("Applet");
         }
 
         /// <summary>
@@ -364,7 +415,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a list of application which match the specific query.</returns>
         public AmiCollection GetApplications(Expression<Func<SecurityApplication, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityApplication", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityApplication", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -373,28 +424,34 @@ namespace SanteDB.Messaging.AMI.Client
         public AmiCollection Query<TModel>(Expression<Func<TModel, bool>> expression, int offset, int? count, out int tr, Guid? queryId = null, ModelSort<TModel>[] orderBy = null)
         {
             // Map the query to HTTP parameters
-            var queryParms = QueryExpressionBuilder.BuildQuery(expression, true).ToList();
+            var queryParms = QueryExpressionBuilder.BuildQuery(expression, true);
 
-            queryParms.Add(new KeyValuePair<string, object>("_offset", offset));
+            queryParms["_offset"] = offset.ToString();
 
             if (count.HasValue)
             {
-                queryParms.Add(new KeyValuePair<string, object>("_count", count));
+                queryParms["_count"]= count.ToString();
             }
 
             if (queryId.HasValue)
-                queryParms.Add(new KeyValuePair<string, object>("_queryId", queryId.ToString()));
+            {
+                queryParms["_queryId"] = queryId.ToString();
+            }
 
             if (orderBy != null)
+            {
                 foreach (var itm in orderBy)
-                    queryParms.Add(new KeyValuePair<string, object>("_orderBy", QueryExpressionBuilder.BuildSortExpression(itm)));
+                {
+                    queryParms["_orderBy"]= QueryExpressionBuilder.BuildSortExpression(itm);
+                }
+            }
 
             // Resource name
             string resourceName = typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlRootAttribute>()?.ElementName
                 ?? typeof(TModel).GetTypeInfo().GetCustomAttribute<XmlTypeAttribute>()?.TypeName;
 
             // The HDSI uses the XMLName as the root of the request
-            var retVal = this.Client.Get<AmiCollection>(resourceName, queryParms.ToArray());
+            var retVal = this.Client.Get<AmiCollection>(resourceName, queryParms);
 
             tr = retVal.Size;
 
@@ -407,19 +464,11 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="query">The query expression to use to find the assigning authorities.</param>
         /// <returns>Returns a collection of assigning authorities which match the specified criteria.</returns>
-        public AmiCollection GetAssigningAuthorities(Expression<Func<AssigningAuthority, bool>> query)
+        public AmiCollection GetIdentityDomains(Expression<Func<IdentityDomain, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("AssigningAuthority", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("IdentityDomain", QueryExpressionBuilder.BuildQuery(query));
         }
 
-        /// <summary>
-        /// Gets a list of certificates.
-        /// </summary>
-        /// <returns>Returns a collection of certificates which match the specified query.</returns>
-        public AmiCollection GetCertificates()
-        {
-            return this.Client.Get<AmiCollection>("Certificate", new KeyValuePair<string, object>("_", DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")));
-        }
 
         /// <summary>
         /// Gets a certificate signing request.
@@ -438,7 +487,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of certificate signing requests which match the specified query.</returns>
         public AmiCollection GetCertificateSigningRequests(Expression<Func<SubmissionInfo, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("Csr", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("Csr", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -458,7 +507,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a list of code systems.</returns>
         public AmiCollection GetCodeSystems(Expression<Func<CodeSystem, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("CodeSystem", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("CodeSystem", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -478,7 +527,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of devices which match the specified query.</returns>
         public AmiCollection GetDevices(Expression<Func<SecurityDevice, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityDevice", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityDevice", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -498,7 +547,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a list of extension types.</returns>
         public AmiCollection GetExtensionTypes(Expression<Func<ExtensionType, bool>> expression)
         {
-            return this.Client.Get<AmiCollection>("ExtensionType", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+            return this.Client.Get<AmiCollection>("ExtensionType", QueryExpressionBuilder.BuildQuery(expression));
         }
 
         /// <summary>
@@ -508,7 +557,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of policies which match the specified query parameters.</returns>
         public AmiCollection GetPolicies(Expression<Func<SecurityPolicy, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityPolicy", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityPolicy", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -534,7 +583,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <summary>
 		/// Gets a specific role.
 		/// </summary>
-		/// <param name="id">The id of the role to be retrieved.</param>
+		/// <param name="roleName">The id of the role to be retrieved.</param>
 		/// <returns>Returns the specified role.</returns>
 		public SecurityRoleInfo GetRole(String roleName)
         {
@@ -548,7 +597,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of roles which match the specified query parameters.</returns>
         public AmiCollection GetRoles(Expression<Func<SecurityRole, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityRole", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityRole", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -556,8 +605,20 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         public AmiCollection GetTwoFactorMechanisms()
         {
-            return this.Client.Get<AmiCollection>("Tfa", null);
+            return this.Client.Get<AmiCollection>("Tfa");
         }
+
+        /// <summary>
+        /// Gets a list of subscriptions.
+        /// </summary>
+        /// <returns></returns>
+        public AmiCollection GetSubscriptionDefinitions() => this.Client.Get<AmiCollection>("SubscriptionDefinition");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SubscriptionDefinition GetSubscriptionDefinition(Guid id) => this.Client.Get<SubscriptionDefinition>($"SubscriptionDefinition/{id}");
 
         /// <summary>
         /// Gets a specific user.
@@ -576,7 +637,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// <returns>Returns a collection of users which match the specified query parameters.</returns>
         public AmiCollection GetUsers(Expression<Func<SecurityUser, bool>> query)
         {
-            return this.Client.Get<AmiCollection>("SecurityUser", QueryExpressionBuilder.BuildQuery(query).ToArray());
+            return this.Client.Get<AmiCollection>("SecurityUser", QueryExpressionBuilder.BuildQuery(query));
         }
 
         /// <summary>
@@ -673,9 +734,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="report">The diagnostic report.</param>
         /// <returns>Returns the submitted diagnostic report.</returns>
-        public void SubmitAudit(AuditData report)
+        public void SubmitAudit(AuditEventData report)
         {
-            this.Client.Post<AuditData, object>("Audit", report);
+            this.Client.Post<AuditEventData, object>("Audit", report);
         }
 
         /// <summary>
@@ -690,18 +751,18 @@ namespace SanteDB.Messaging.AMI.Client
         /// Retrieves an audit
         /// </summary>
         /// <param name="id">The id of the audit to retrieve</param>
-        public AuditData GetAudit(Guid id)
+        public AuditEventData GetAudit(Guid id)
         {
-            return this.Client.Get<AuditData>($"Audit/{id}");
+            return this.Client.Get<AuditEventData>($"Audit/{id}");
         }
 
         /// <summary>
         /// Retrieves an audit
         /// </summary>
         /// <param name="expression">The query to filter audits on</param>
-        public AuditData GetAudits(Expression<Func<AuditData, bool>> expression)
+        public AuditEventData GetAudits(Expression<Func<AuditEventData, bool>> expression)
         {
-            return this.Client.Get<AuditData>($"Audit", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+            return this.Client.Get<AuditEventData>($"Audit", QueryExpressionBuilder.BuildQuery(expression));
         }
 
         /// <summary>
@@ -728,7 +789,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// Updates an alert.
         /// </summary>
         /// <param name="messageId">The id of the alert to be updated.</param>
-        /// <param name="alertMessageInfo">The alert message info containing the updated information.</param>
+        /// <param name="mailMessage">The alert message info containing the updated information.</param>
         /// <returns>Returns the updated alert.</returns>
         public MailMessage UpdateMailMessage(Guid messageId, MailMessage mailMessage)
         {
@@ -768,9 +829,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// <param name="assigningAuthorityId">The id of the assigning authority to be updated.</param>
         /// <param name="assigningAuthorityInfo">The assigning authority info containing the updated information.</param>
         /// <returns>Returns the updated assigning authority.</returns>
-        public AssigningAuthority UpdateAssigningAuthority(Guid assigningAuthorityId, AssigningAuthority assigningAuthorityInfo)
+        public IdentityDomain UpdateAssigningAuthority(Guid assigningAuthorityId, IdentityDomain assigningAuthorityInfo)
         {
-            return this.Client.Put<AssigningAuthority, AssigningAuthority>($"AssigningAuthority/{assigningAuthorityId}", assigningAuthorityInfo);
+            return this.Client.Put<IdentityDomain, IdentityDomain>($"AssigningAuthority/{assigningAuthorityId}", assigningAuthorityInfo);
         }
 
         /// <summary>
@@ -881,7 +942,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         public AmiCollection GetApplicationEntities(Expression<Func<ApplicationEntity, bool>> expression)
         {
-            return this.Client.Get<AmiCollection>("ApplicationEntity", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+            return this.Client.Get<AmiCollection>("ApplicationEntity", QueryExpressionBuilder.BuildQuery(expression));
         }
 
         /// <summary>
@@ -889,7 +950,7 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         public AmiCollection GetDeviceEntities(Expression<Func<DeviceEntity, bool>> expression)
         {
-            return this.Client.Get<AmiCollection>("DeviceEntity", QueryExpressionBuilder.BuildQuery(expression).ToArray());
+            return this.Client.Get<AmiCollection>("DeviceEntity", QueryExpressionBuilder.BuildQuery(expression));
         }
 
         /// <summary>
@@ -954,6 +1015,18 @@ namespace SanteDB.Messaging.AMI.Client
         public SecurityUserInfo UnlockUser(Guid userId)
         {
             return this.Client.Unlock<SecurityUserInfo>($"SecurityUser/{userId}");
+        }
+
+        /// <summary>
+        /// Add policy <paramref name="policyOid"/> to <paramref name="securable"/>
+        /// </summary>
+        public void AddPolicy(IAnnotatedResource securable, string policyOid, PolicyGrantType rule)
+        {
+            this.Client.Post<SecurityPolicyInfo, SecurityPolicyInfo>($"{securable.GetType().GetSerializationName()}/{securable.Key}/policy", new SecurityPolicyInfo()
+            {
+                Oid = policyOid,
+                Grant = rule
+            });
         }
     }
 }
