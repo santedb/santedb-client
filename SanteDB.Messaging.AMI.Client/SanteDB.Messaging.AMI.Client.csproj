@@ -75,7 +75,7 @@
           <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
           <Name>SanteDB.Core.Api</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.Ami\SanteDB.Core.Model.Ami.csproj" />
+        <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.AMI\SanteDB.Core.Model.AMI.csproj" />
       </ItemGroup>
     </When>
     <Otherwise>
