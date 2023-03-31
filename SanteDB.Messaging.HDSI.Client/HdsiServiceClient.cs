@@ -68,6 +68,7 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <typeparam name="TModel">The type of data to be created.</typeparam>
         /// <param name="data">The data to be created.</param>
         /// <returns>Returns the newly created data.</returns>
+        /// <param name="asBundle">True if the result should be returned as a bundle</param>
         public TModel Create<TModel>(TModel data, bool asBundle) where TModel : IdentifiedData
         {
             if (data == null)
@@ -185,6 +186,8 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="offset">The offset of the query.</param>
         /// <param name="count">The count of the query results.</param>
         /// <param name="all">Whether the query should return all nested properties.</param>
+        /// <param name="queryId">The stateful query id</param>
+        /// <param name="orderBy">The ordering instructions</param>
         /// <returns>Returns a Bundle containing the data.</returns>
         public Bundle Query<TModel>(Expression<Func<TModel, bool>> query, int offset, int? count, bool all, Guid? queryId = null, ModelSort<TModel>[] orderBy = null) where TModel : IdentifiedData
         {
@@ -233,8 +236,9 @@ namespace SanteDB.Messaging.HDSI.Client
         /// <param name="query">The query parameters as a LINQ expression.</param>
         /// <param name="offset">The offset of the query.</param>
         /// <param name="count">The count of the query results.</param>
-        /// <param name="expandProperties">An property traversal for which to expand upon.</param>
         /// <returns>Returns a Bundle containing the data.</returns>
+        /// <param name="orderBy">The ordering instructions</param>
+        /// <param name="queryId">The stateful query identifier</param>
         public Bundle Query<TModel>(Expression<Func<TModel, bool>> query, int offset, int? count, Guid? queryId = null, ModelSort<TModel>[] orderBy = null) where TModel : IdentifiedData
         {
             // Map the query to HTTP parameters
@@ -287,6 +291,7 @@ namespace SanteDB.Messaging.HDSI.Client
         /// </summary>
         /// <typeparam name="TModel">The type of data to be updated.</typeparam>
         /// <param name="data">The data to be updated.</param>
+        /// <param name="asBundle">True if the result should be returned as a bundle</param>
         /// <returns>Returns the updated data.</returns>
         public TModel Update<TModel>(TModel data, bool asBundle) where TModel : IdentifiedData
         {
