@@ -28,7 +28,6 @@ using SanteDB.Core.Model.Query;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -215,7 +214,7 @@ namespace SanteDB.Messaging.HDSI.Client
             {
                 foreach (var itm in orderBy)
                 {
-                    queryParms["_orderBy"]= QueryExpressionBuilder.BuildSortExpression(itm);
+                    queryParms["_orderBy"] = QueryExpressionBuilder.BuildSortExpression(itm);
                 }
             }
 
@@ -244,17 +243,17 @@ namespace SanteDB.Messaging.HDSI.Client
             // Map the query to HTTP parameters
             var queryParms = QueryExpressionBuilder.BuildQuery(query, true);
 
-            queryParms["_offset"]= offset.ToString();
+            queryParms["_offset"] = offset.ToString();
 
             if (count.HasValue)
             {
-                queryParms["_count"]= count.ToString();
+                queryParms["_count"] = count.ToString();
             }
 
 
             if (queryId.HasValue)
             {
-                queryParms["_queryId"]=queryId.ToString();
+                queryParms["_queryId"] = queryId.ToString();
             }
 
             if (orderBy != null)

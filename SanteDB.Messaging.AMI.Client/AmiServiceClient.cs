@@ -82,7 +82,7 @@ namespace SanteDB.Messaging.AMI.Client
             query["_count"] = "1";
             query["name"] = roleName;
             var roleId = this.Client.Get<AmiCollection>($"{typeof(SecurityRole).GetSerializationName()}", query).CollectionItem.OfType<SecurityRoleInfo>().FirstOrDefault()?.Key;
-            if(roleId == null)
+            if (roleId == null)
             {
                 throw new KeyNotFoundException(roleName);
             }
@@ -430,7 +430,7 @@ namespace SanteDB.Messaging.AMI.Client
 
             if (count.HasValue)
             {
-                queryParms["_count"]= count.ToString();
+                queryParms["_count"] = count.ToString();
             }
 
             if (queryId.HasValue)
@@ -442,7 +442,7 @@ namespace SanteDB.Messaging.AMI.Client
             {
                 foreach (var itm in orderBy)
                 {
-                    queryParms["_orderBy"]= QueryExpressionBuilder.BuildSortExpression(itm);
+                    queryParms["_orderBy"] = QueryExpressionBuilder.BuildSortExpression(itm);
                 }
             }
 
