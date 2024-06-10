@@ -62,7 +62,14 @@
     <None Include="app.config" />
   </ItemGroup>
   <Choose>
-    <When Condition="$(SolutionName.Contains('-ext'))">
+    <When Condition="$(SolutionName.Contains('-nuget'))">
+      <ItemGroup>
+        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
+        <PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
+        <PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
       <ItemGroup>
         <ProjectReference Include="..\..\santedb-model\SanteDB.Core.Model\SanteDB.Core.Model.csproj">
           <Project>{F1A82A4F-4A57-47D7-AE76-444C8A4FF54A}</Project>
@@ -76,13 +83,6 @@
           <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
           <Name>SanteDB.Core.Api</Name>
         </ProjectReference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
-        <PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
-        <PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
       </ItemGroup>
     </Otherwise>
   </Choose>
