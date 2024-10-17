@@ -1026,5 +1026,13 @@ namespace SanteDB.Messaging.AMI.Client
                 Grant = rule
             });
         }
+
+        /// <summary>
+        /// Remove policy <paramref name="policyId"/> from <paramref name="securable"/>
+        /// </summary>
+        public void RemovePolicy(IAnnotatedResource securable, Guid policyId)
+        {
+            this.Client.Delete<SecurityPolicyInfo>($"{securable.GetType().GetSerializationName()}/{securable.Key}/policy/{policyId}");
+        }
     }
 }
