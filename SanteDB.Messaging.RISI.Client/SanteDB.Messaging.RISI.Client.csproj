@@ -1,93 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(VersionNumber)' == ''">
-    <VersionNumber>3.0-debug</VersionNumber>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PackageId>SanteDB.Messaging.RISI.Client</PackageId>
-    <Title>SanteDB.Messaging.RISI.Client</Title>
-    <Version>$(VersionNumber)</Version>
-    <Description>SanteDB Report Integration Services Interface (RISI) is a legacy report and adhoc query interface on OpenIZ and SanteDB services</Description>
-    <Authors>SanteSuite Contributors</Authors>
-    <PackageTags>SanteDB</PackageTags>
-    <RepositoryUrl>https://github.com/santedb/santedb-client</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <IncludeSymbols>true</IncludeSymbols>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-	    <Product>SanteDB</Product>
-    <Copyright>Copyright (C) 2015-2026 SanteSuite Contributors (See: NOTICES)</Copyright>
-    <Company>SanteSuite Contributors</Company>
-    <PackageIconUrl>http://santesuite.org/assets/img/logo.png</PackageIconUrl>
-    <PackageProjectUrl>http://santesuite.org</PackageProjectUrl>
-  </PropertyGroup>  
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-  </ItemGroup>         
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\SanteDB.Messaging.RISI.Client.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\SanteDB.Messaging.RISI.Client.XML</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="..\SanteDB.licenseheader">
-      <Link>SanteDB.licenseheader</Link>
-    </None>
-    <None Include="app.config" />
-  </ItemGroup>
-  <!-- <ItemGroup> -->
-    <!-- <Compile Include="RisiServiceClient.cs" /> -->
-    <!-- <Compile Include="Properties\AssemblyInfo.cs" /> -->
-  <!-- </ItemGroup> -->
-  <Choose>
-    <When Condition="$(SolutionName.Contains('-ext'))">
-      <ItemGroup>
-        <ProjectReference Include="..\..\santedb-model\SanteDB.Core.Model\SanteDB.Core.Model.csproj">
-          <Project>{F1A82A4F-4A57-47D7-AE76-444C8A4FF54A}</Project>
-          <Name>SanteDB.Core.Model</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\santedb-applets\SanteDB.Core.Applets\SanteDB.Core.Applets.csproj">
-          <Project>{39E61451-F4FE-493D-B754-5F06EB284AAC}</Project>
-          <Name>SanteDB.Core.Applets</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
-          <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
-          <Name>SanteDB.Core.Api</Name>
-        </ProjectReference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
-        <PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
-        <PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="SanteDB.Core.Model.RISI">
-      <Version>$(VersionNumber)</Version>
-    </PackageReference>
-    <PackageReference Include="SharpCompress" Version="0.33.0" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(VersionNumber)' == ''">
+		<VersionNumber>3.0-debug</VersionNumber>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net10.0;net48;netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup>
+		<PackageId>SanteDB.Messaging.RISI.Client</PackageId>
+		<Title>SanteDB.Messaging.RISI.Client</Title>
+		<Version>$(VersionNumber)</Version>
+		<Description>SanteDB Report Integration Services Interface (RISI) is a legacy report and adhoc query interface on OpenIZ and SanteDB services</Description>
+		<Authors>SanteSuite Contributors</Authors>
+		<PackageTags>SanteDB</PackageTags>
+		<RepositoryUrl>https://github.com/santedb/santedb-client</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<IncludeSymbols>true</IncludeSymbols>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<Product>SanteDB</Product>
+		<Copyright>Copyright (C) 2015-2026 SanteSuite Contributors (See: NOTICES)</Copyright>
+		<Company>SanteSuite Contributors</Company>
+		<PackageIconUrl>http://santesuite.org/assets/img/logo.png</PackageIconUrl>
+		<PackageProjectUrl>http://santesuite.org</PackageProjectUrl>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- A reference to the entire .NET Framework is automatically included -->
+		<None Include="..\SanteDB.licenseheader">
+			<Link>SanteDB.licenseheader</Link>
+		</None>
+	</ItemGroup>
+	<Choose>
+		<When Condition="$(SolutionName.Contains('-nuget'))">
+			<ItemGroup>
+				<ProjectReference Include="..\..\santedb-model\SanteDB.Core.Model\SanteDB.Core.Model.csproj" />
+				<ProjectReference Include="..\..\santedb-applets\SanteDB.Core.Applets\SanteDB.Core.Applets.csproj" />
+				<ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj" />
+				<ProjectReference Include="..\..\santedb-restsvc\SanteDB.Core.Model.RISI\SanteDB.Core.Model.RISI.csproj" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
+				<PackageReference Include="SanteDB.Core.Applets" Version="$(VersionNumber)" />
+				<PackageReference Include="SanteDB.Core.Model" Version="$(VersionNumber)" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="SharpCompress" Version="0.40.0" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	</ItemGroup>
 </Project>
